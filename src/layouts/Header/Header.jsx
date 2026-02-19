@@ -2,7 +2,7 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuthStore } from '../../stores/authStore';
 import * as s from "./styles"
-import {  MENU_ITEMS_LEFT, MENU_ITEMS_RIGHT } from '../../constants/menu';
+import { MENU_ITEMS } from '../../constants/menu';
 import { AiOutlineLogin, AiOutlineLogout, AiOutlineUser } from 'react-icons/ai';
 import logo from "../../assets/logo.png"
 import Signin from './../../pages/Signin/Signin';
@@ -20,23 +20,19 @@ export default function Header() {
 
     return (
         <header css={s.container}>
-            {/* Best, 아우터 */}
-            <nav css={s.nav}>
-                {MENU_ITEMS_LEFT.map((menu) => (
-                    <Link key={menu.id} to={menu.path} css={s.navLink}>{menu.name}</Link>
-                ))}
-            </nav>
-
             {/* 로고 */}
             <Link to="/" css={s.logo}>
                 <img src={logo} alt="logo" />
             </Link>
 
-            {/* 상의, 하의 */}
             <nav css={s.nav}>
-                {MENU_ITEMS_RIGHT.map((menu) => (
-                    <Link key={menu.id} to={menu.path} css={s.navLink}>{menu.name}</Link>
-                ))}
+                {MENU_ITEMS.map((menu) => {
+                return (
+                    <Link key={menu.id} to={menu.path} css={s.navLink}>
+                    {menu.name}
+                    </Link>
+                );
+                })}
             </nav>
 
             {/* 3. 마이페이지와 로그아웃 상단바 */}
