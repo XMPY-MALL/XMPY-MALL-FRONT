@@ -9,9 +9,6 @@ import { create } from "zustand";
 export const useAuthStore = create((set) => {
     const accessToken = localStorage.getItem("accessToken");
 
-
-    
-
     return {
         isAuthenticated : !!accessToken,
         accessToken: accessToken,
