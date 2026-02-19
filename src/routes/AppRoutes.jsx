@@ -10,9 +10,9 @@ export default function AppRoutes() {
             {/* 2. MainLayout으로 들어감 */}
             <Route element={<MainLayout />}>
                 {PUBLIC_ROUTES.map((route) => {
-                    return <Route key={route.id} path={route.path} element={route.element}/>
+                    return <Route key={route.id} path={route.path} element={route.element} />
                 })}
-                {/* 위에 mapping을 한 자식 Route들이  "MainLayout의 Outlet안" 에 들어간다... */}
+                {/* 위에 PUBLIC_ROUTES들을 mapping을 한 자식 Route들이  "MainLayout의 Outlet안" 에 들어간다 */}
             </Route>
         </Routes>
     );

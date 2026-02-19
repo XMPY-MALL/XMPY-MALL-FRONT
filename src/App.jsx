@@ -3,9 +3,9 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
-import './App.css'
 import { BrowserRouter } from 'react-router-dom'
 import AppRoutes from './routes/AppRoutes'
+import {css, Global} from "@emotion/react";
 
 
 // 전역 스타일 초기화
@@ -34,10 +34,13 @@ const globalStyle = css`
   }
 `
 
+const queryClient = new QueryClient();
+
 function App() {
   return (
-    <QueryClientProvider client={QueryClient}>
-      <Global styles={globalStyle}/>
+    <QueryClientProvider client={queryClient}>
+      {/* <Global styles={globalStyle}/> */}
+      <Global styles={globalStyle} />
       <BrowserRouter>
         <AppRoutes/>
         {/* 1. AppRoutes로 먼저 들어감 */}
@@ -46,4 +49,4 @@ function App() {
   )
 }
 
-export default App
+export default App;

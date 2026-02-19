@@ -1,25 +1,24 @@
 /** @jsxImportSource @emotion/react */
-import React from 'react';
+import { css } from "@emotion/react";
 import * as s from "./styles";
 import Header from "../Header/Header";
-import { css } from '@emotion/react';
-import { Outlet } from 'react-router-dom';
-import Footer from '../Footer/Footer';
+import { Outlet } from "react-router-dom";
+import Footer from "../Footer/Footer";
 
 export default function MainLayout() {
-    return (
-        // Header, main, Footer로 들어감
-        <div css = {s.layout}>
-            <Header/>
-            {/* 헤더부분임... */}
-            
-            <main css={s.main}>
-                <Outlet />
-            </main>
+  return (
+    // Header, main, Footer로 들어감
+    <div css={s.layout}>
+      {/* 헤더부분임... */}
+      <Header />
 
-            <Footer/>
-            {/* 맨 아래 Footer부분 */}
-        </div>
-    );
+      {/* 메인(중간)부분 */}
+      <main css={s.main}>
+        <Outlet />
+      </main>
+
+      {/* 맨아래부분 */}
+      <Footer />
+    </div>
+  );
 }
-

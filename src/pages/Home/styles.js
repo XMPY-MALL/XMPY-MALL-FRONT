@@ -6,6 +6,7 @@ export const container = css`
   align-items: center;
   justify-content: center;
   overflow-y: auto;
+  background-color: white;
 `;
 
 export const cardSection = css`

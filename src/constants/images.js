@@ -1,7 +1,7 @@
-import test1 from "../../assets/test1.webp";
-import test2 from "../../assets/test2.webp";
-import test3 from "../../assets/test3.webp";
-import test4 from "../../assets/test4.webp";
+import test1 from "../assets/test1.webp";
+import test2 from "../assets/test2.webp";
+import test3 from "../assets/test3.webp";
+import test4 from "../assets/test4.webp";
 
 // 일단, 예시 이미지 자료와 예시css
 export const HOME_IMAGE_CARDS = [

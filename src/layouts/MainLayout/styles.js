@@ -1,11 +1,13 @@
-import { css } from "@emotion/react"
+import { css } from "@emotion/react";
 
-// 해당 코드 안에, 
-// 그 그 메인페이지 css를 적용시켜놓을 것이다
 export const layout = css`
-
-`
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: #fff;
+`;
 
 export const main = css`
-
-`
+    flex: 1;
+    background-color: #fff;
+`;
