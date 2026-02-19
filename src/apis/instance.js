@@ -13,8 +13,28 @@ const instance = axios.create({
     headers: {
         "Content-Type" : "application/json"
     },
-    withCredentials: true
 })
+
+
+// axios의 인터셉터 기능
+instance.interceptors.request.use(
+  (config) => {
+    const accessToken = localStorage.getItem("accessToken")
+    if(!!accessToken) {
+      config
+      .headers
+      .Authorization = `Bearer ${accessToken}`;
+    }
+    return config;
+  },
+  (error) => {
+    // 요청 설정 하다가 에러가 발생한 경우
+    // 실행할 함수
+    return Promise.reject(error);
+  }
+);
+
+
 
 export default instance;
 // 아래는 refreshToken내용일 것 같은데...

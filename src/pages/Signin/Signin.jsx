@@ -18,16 +18,20 @@ export default function Signin() {
     })
 
     const {isPending, mutate} = useSigninMutation();
+    // 여기의 mutate가 useSignin의 mutationFn, onSucess모두 해당?
 
     // 로그인 버튼을 눌렀을때, 실행되는 코드
     const handleSignin = () => {
-        mutate(formVal, {
+        mutate(formVal,
+        // mutate가 성공하면 실행한다.
+        {
             onSuccess : () => {
                 setTimeout(() => {
                     window.location.href = "/";
                 }, 1000);
             }
-        })
+        }
+        )
     }
 
 
@@ -55,7 +59,7 @@ export default function Signin() {
 
                     <div css={s.inputBox}>
                         <label>패스워드</label>
-                        <input 
+                        <input
                             type="password"
                             value={formVal.password}
                             name='password'
