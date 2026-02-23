@@ -29,7 +29,7 @@ export const useAuthStore = create((set) => {
             })
         }
 
-
+    
         // 이 안에 setToken이 들어가야하는지 아닌지..
     }
 })
