@@ -1,103 +1,99 @@
+// Header/styles.ts
 import { css } from "@emotion/react";
+import { XMPY_COLORS } from "../../constants/colors";
 
+// 전체 헤더 래퍼
 export const container = css`
   width: 100%;
-  height: 80px;
+  background-color: ${XMPY_COLORS.WHITE};
+  border-bottom: 1px solid ${XMPY_COLORS.LIGHT_BEIGE};
+`;
+
+/* ── 1줄: 서브바 ── */
+export const topBar = css`
+  width: 100%;
+  height: 36px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 32px;
+  padding: 0 40px;
+  border-bottom: 1px solid ${XMPY_COLORS.LIGHT_BEIGE};
+`;
+
+export const topBarLink = css`
+  font-size: 14px;
+  font-weight: 700;
+  color: ${XMPY_COLORS.GRAY_BROWN};
+  text-decoration: none;
+
+  &:hover {
+    color: ${XMPY_COLORS.BLACK};
+  }
+`;
+
+/* ── 2줄: 메인바 ── */
+export const mainBar = css`
+  width: 100%;
+  height: 64px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0 40px;
-  background-color: #fafafa;
-  border-bottom: 1px solid #ddd;
 `;
 
 export const logo = css`
-  margin-right: 40px;
-  & > img {
-    position: relative;
-    top: 3px;
-    height: 35px;
-    width: auto;
+  font-size: 22px;
+  font-weight: 700;
+  color: ${XMPY_COLORS.BLACK};
+  text-decoration: none;
+  letter-spacing: 2px;
+  min-width: 100px;
+
+  &:hover {
+    color: ${XMPY_COLORS.BLACK};
   }
 `;
 
 export const nav = css`
   display: flex;
-  gap: 30px;
+  gap: 52px;
   flex-grow: 1;
+  justify-content: center;
 `;
 
 export const navLink = css`
-  font-size: 16px;
-  color: #666;
+  font-size: 15px;
+  color: ${XMPY_COLORS.GRAY_BROWN};
   text-decoration: none;
-  transition: color 0.2s ease-in-out;
+  letter-spacing: 0.5px;
+  transition: color 0.2s;
 
   &:hover {
-    color: #333;
-  }
-`
-
-export const userSection = css`
-  display: flex;
-  align-items: center;
-  gap: 20px;
-`;
-
-export const myPageLink = css`
-  font-size: 16px;
-  color: #666;
-  text-decoration: none;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-
-  &:hover {
-    color: #333;
-  }
-
-  & > svg {
-    font-size: 18px;
+    color: ${XMPY_COLORS.BLACK};
   }
 `;
 
-export const logoutButton = css`
-  font-size: 16px;
-  color: #666;
+export const iconSection = css`
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-width: 100px;
+  justify-content: flex-end;
+`;
+
+export const iconButton = css`
   background: none;
   border: none;
   cursor: pointer;
+  color: ${XMPY_COLORS.GRAY_BROWN};
   display: flex;
   align-items: center;
-  gap: 6px;
-
-  &:hover {
-    color: #333;
-  }
-  & > svg {
-    font-size: 16px;
-  }
-`;
-
-export const loginLink = css`
-  font-size: 16px;
-  color: #666;
+  font-size: 26px;
+  padding: 0;
   text-decoration: none;
-  display: flex;
-  align-items: center;
-  gap: 6px;
 
   &:hover {
-    color: #333;
+    color: ${XMPY_COLORS.BLACK};
   }
-
-  & > svg {
-    font-size: 18px;
-  }
-
 `;
-
-
-
-
-

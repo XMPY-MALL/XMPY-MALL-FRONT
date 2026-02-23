@@ -1,38 +1,64 @@
 import { css } from "@emotion/react";
+import { XMPY_COLORS } from "../../constants/colors";
+
 export const container = css`
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow-y: auto;
-  background-color: white;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px;
 `;
 
-export const cardSection = css`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 30px;
-  max-width: 1400px;
+export const sectionTitle = css`
+  font-size: 20px;
+  font-weight: 700;
+  color: ${XMPY_COLORS.BLACK};
+  margin-bottom: 24px;
+`;
+
+export const swiper = css`
+  width: 100%;
+  padding-bottom: 40px; /* pagination dot 공간 */
 `;
 
 export const card = css`
-  height: 450px;
-  overflow: hidden;
-  flex-basis: 20%; // 정렬된 상태에서 공간점유 20%
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-  cursor: pointer;
-  transition: transform 0.15s ease;
+  position: relative;
   border-radius: 8px;
-  &:hover {
-    transform: translateY(-8px);
-  }
-`
+  overflow: hidden;
+  cursor: pointer;
+`;
 
 export const cardImage = css`
-  height: 100%;
   width: 100%;
-  object-fit: cover; // 요소 크기만큼만 보여짐
-  object-position: center; // 이미지 center로 기준변경
-`
+  aspect-ratio: 1 / 1;
+  background-color: ${XMPY_COLORS.LIGHT_BEIGE};
+`;
+
+export const cardTitle = css`
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
+  font-size: 16px;
+  font-weight: 600;
+  color: ${XMPY_COLORS.WHITE};
+`;
+
+// styles.js에 추가
+export const swiperWrapper = css`
+  width: 100%;
+  padding-bottom: 40px;
+
+  /* 화살표 크기 & 색상 */
+  --swiper-navigation-size: 20px;
+  --swiper-navigation-color: ${XMPY_COLORS.GRAY_BROWN};
+
+  /* pagination dot 색상 */
+  --swiper-pagination-color: ${XMPY_COLORS.BEIGE_BROWN};
+  --swiper-pagination-bullet-inactive-color: ${XMPY_COLORS.LIGHT_BEIGE};
+  --swiper-pagination-bullet-inactive-opacity: 1;
+
+  .swiper-button-next,
+  .swiper-button-prev {
+    &:hover {
+      --swiper-navigation-color: ${XMPY_COLORS.BLACK};
+    }
+  }
+`;
