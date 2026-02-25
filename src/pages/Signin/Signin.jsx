@@ -16,7 +16,7 @@ export default function Signin() {
     // 위에 친구들이 initVal(매개변수)
   });
 
-  const { isPending, mutate } = useSigninMutation();
+  const {isPending, mutate} = useSigninMutation();
   // 여기의 mutate가 useSignin의 mutationFn, onSucess모두 해당?
 
   // 로그인 버튼을 눌렀을때, 실행되는 코드
