@@ -2,7 +2,6 @@ import { useMutation } from "@tanstack/react-query";
 import { useAuthStore } from "../../../stores/authStore"
 import { signinApi } from "../../../apis/endpoints/auth";
 
-
 export const useSigninMutation = () => {
     const {login} = useAuthStore();
 
@@ -11,7 +10,7 @@ export const useSigninMutation = () => {
         // response.data 받는다
 
         onSuccess: (data) => {
-            const accessToken = data;
+            const accessToken = data.accessToken;
             // accessToken이라는 변수에 해당 data를 저장한다
 
             login(accessToken);
