@@ -3,22 +3,21 @@ import { BrowserRouter } from "react-router-dom";
 import AppRoutes from "./routes/AppRoutes";
 import { css, Global } from "@emotion/react";
 
-// 전역 스타일 초기화
 const globalStyle = css`
-  /* 모든 태그 초기화 */
   * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
   }
 
-  /* index.html에 있는 id=root div */
+  html, body {
+    height: 100%;
+  }
+
+  /* #root flex 중앙정렬 제거 */
   #root {
     width: 100%;
     height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
   }
 `;
 

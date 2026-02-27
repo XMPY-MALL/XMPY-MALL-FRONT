@@ -4,6 +4,9 @@ import { useAuthStore } from '../../stores/authStore';
 import * as s from "./styles"
 import { MENU_ITEMS } from '../../constants/menu';
 import { AiOutlineShopping, AiOutlineUser } from "react-icons/ai";
+import Signup from './../../pages/Signup/Signup';
+import Signin from './../../pages/Signin/Signin';
+
 
 export default function Header() {
   const navigate = useNavigate();
@@ -24,8 +27,8 @@ export default function Header() {
           </button>
         ) : (
           <>
-            <Link to="/signup" css={s.topBarLink}>회원가입</Link>
-            <Link to="/signin" css={s.topBarLink}>로그인</Link>
+            <Link to="/Signup" css={s.topBarLink}>회원가입</Link>
+            <Link to="/Signin" css={s.topBarLink}>로그인</Link>
           </>
         )}
         <Link to="/notice" css={s.topBarLink}>공지사항</Link>

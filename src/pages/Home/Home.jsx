@@ -28,13 +28,13 @@ export default function Home() {
           autoplay={{ delay: 3000, disableOnInteraction: false }}
           css={s.swiper}
         >
-          {BEST_ITEMS.map((item) => (
+        {BEST_ITEMS.map((item) => (
             <SwiperSlide key={item.id}>
               <div css={s.card}>
                 <div css={s.cardImage}>
                   {/* 이미지 들어올 자리!! 여기에 useQuery로 Best아이템들 잡아와서 넣으십시오 */}
                 </div>
-                <p css={s.cardTitle}>{item.title}</p>
+                <p css={s.cardTitle}> {item.title} </p>
               </div>
             </SwiperSlide>
           ))}

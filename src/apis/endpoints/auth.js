@@ -6,3 +6,8 @@ export const signinApi = async (dto) => {
   return response.data;
 };
 //  {username:"", password: ""} -> dto -> response.data
+
+
+export const signupAPI = async (dto) => {
+  const response = await instance.post("/auth/signup", dto)
+}

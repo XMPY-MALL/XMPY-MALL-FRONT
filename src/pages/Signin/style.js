@@ -1,40 +1,46 @@
+
+/** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 
 export const container = css`
   width: 100%;
-  height: 100%;
+  min-height: calc(100vh - 100.67px - 521.33px);
   display: flex;
   align-items: center;
   justify-content: center;
+  padding-top: 10px;
+  padding-bottom: 70px;
+  background-color: #F8F6F1;
 `;
+
 export const signinBox = css`
   width: 450px;
-  padding: 50px 40px;
-  background-color: white;
-  border-radius: 16px;
-  border: 1px solid #eee;
-`;
-export const logoBox = css`
+  padding: 60px 40px;
   display: flex;
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
-  margin-bottom: 25px;
 `;
-export const logo = css`
-  width: 70px;
-`;
+
+
+
 export const title = css`
   text-align: center;
-  margin-bottom: 40px;
-  color: #333;
-  font-size: 28px;
+  margin-bottom: 8px;
+  color: #1A1A1A;
+  font-size: 20px;
+  font-weight: 450;
   cursor: default;
 `;
+
 export const formBox = css`
   display: flex;
   flex-direction: column;
   gap: 20px;
   width: 100%;
+  margin-top: 5px;
 `;
+
 export const inputBox = css`
   display: flex;
   flex-direction: column;
@@ -43,19 +49,19 @@ export const inputBox = css`
   & > label {
     font-size: 14px;
     font-weight: 500;
-    color: #333;
+    color: #1A1A1A;
   }
 
   & > input {
-  // 현재 요소의 직계 input
     padding: 12px 16px;
     font-size: 14px;
-    border: 1px solid #ddd;
-    border-radius: 6px;
+    border: 1px solid #E8E2D9;
+    border-radius: 4px;
+    background-color: #fff;
 
     &:focus {
       outline: none;
-      border-color: #2d80e5;
+      border-color: #C4A882;
     }
 
     &::placeholder {
@@ -63,24 +69,26 @@ export const inputBox = css`
     }
   }
 `;
+
 export const btn = css`
-  padding: 14px;
-  font-size: 16px;
-  font-weight: 600;
-  background-color: #2d80e5;
+  padding: 8px;
+  font-size: 15px;
+  font-weight: 500;
+  background-color: #6B6560;
   border: none;
   color: white;
   cursor: pointer;
   transition: background-color 0.2s ease;
-  border-radius: 6px;
-  margin-top: 10px;
+  border-radius: 4px;
+  margin-top: 3px;
+  width: 100%;
 
   &:hover {
-    background-color: #1b76e5;
+    background-color: #1A1A1A;
   }
 
   &:disabled {
-    background-color: #ccc;
+    background-color: #E8E2D9;
     cursor: not-allowed;
   }
 `;
@@ -93,7 +101,7 @@ export const signupTextBox = css`
 `;
 
 export const signupText = css`
-  color: #333;
+  color: #1A1A1A;
   font-size: 14px;
   cursor: default;
 `;
@@ -101,5 +109,5 @@ export const signupText = css`
 export const signupLink = css`
   text-decoration: none;
   font-size: 14px;
-  color: #1b76e5;
+  color: #C4A882;
 `;
