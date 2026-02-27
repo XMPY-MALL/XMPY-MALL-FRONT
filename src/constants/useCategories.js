@@ -44,7 +44,7 @@
         ...{}
     ]
 */
-
+// 나중에 useQuery로 get요청해서 위와같이 받아오셈
 export const useCategories = () => {
   return [
     {
