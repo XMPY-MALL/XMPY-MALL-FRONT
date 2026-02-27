@@ -3,10 +3,12 @@ import { css } from "@emotion/react";
 import { XMPY_COLORS } from "../../constants/colors";
 
 // 전체 헤더 래퍼
+// Header/styles.js 수정
 export const container = css`
   width: 100%;
   background-color: ${XMPY_COLORS.WHITE};
   border-bottom: 1px solid ${XMPY_COLORS.LIGHT_BEIGE};
+  position: relative;
 `;
 
 /* ── 1줄: 서브바 ── */
@@ -63,6 +65,9 @@ export const nav = css`
 `;
 
 export const navLink = css`
+  display: flex;
+  align-items: center;
+  height: 64px;
   font-size: 15px;
   color: ${XMPY_COLORS.GRAY_BROWN};
   text-decoration: none;
