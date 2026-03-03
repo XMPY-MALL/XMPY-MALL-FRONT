@@ -1,9 +1,10 @@
 import Home from "../pages/Home/Home";
+import ProductDetailPage from "../pages/ProductDetailPage/ProductDetailPage";
 import Signin from "../pages/Signin/Signin";
 import Signup from "../pages/Signup/Signup";
+import SubMenuPage from "../pages/SubMenuPage/SubMenuPage";
 
 // 상단 header navbar 일반메뉴들
-
 
 export const STATIC_MENU_ITEMS = [
   {
@@ -14,13 +15,17 @@ export const STATIC_MENU_ITEMS = [
   },
 ];
 
-
 export const PUBLIC_ROUTES = [
   ...STATIC_MENU_ITEMS,
   {
     id: "category",
-    path: "/category/:categoryDetailId", // 서브메뉴 클릭시 pathVariable을 받아서 하나의 컴포넌트에서 get요청
-    element: <>서브메뉴 화면</>,
+    path: "/category/:categoryDetailId",
+    element: <SubMenuPage />,
+  },
+  {
+    id: "product",
+    path: "/product/:productId",
+    element: <ProductDetailPage />,
   },
   {
     id: "signin",
