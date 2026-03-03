@@ -6,7 +6,7 @@ import { useParams } from "react-router-dom";
 import { useProduct } from "./hooks/useProductDetail";
 
 export default function ProductDetailPage() {
-  const id = useParams("productId");
+  const { id } = useParams();
   const { best, imgUrls, price, productDetailContent, productName } =
     useProduct(id);
 

@@ -1,6 +1,8 @@
-export const useSubMenu = (categoryDetailId) => {
+// hooks/useSubMenu.js
+export const useSubMenu = (categoryDetailId, page) => {
   return {
     categoryDetailName: "셔츠",
+    totalPages: 5,
     products: [
       {
         productId: 1,
@@ -91,11 +93,5 @@ export const useSubMenu = (categoryDetailId) => {
         reviewCount: 5,
       },
     ],
-    pagination: {
-      currentPage: 1,
-      totalPages: 3,
-      totalElements: 24,
-      pageSize: 8,
-    },
   };
 };
