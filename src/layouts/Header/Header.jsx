@@ -1,15 +1,17 @@
 /** @jsxImportSource @emotion/react */
-import { Link, useNavigate } from 'react-router-dom';
-import { useAuthStore } from '../../stores/authStore';
-import * as s from "./styles"
-import { MENU_ITEMS } from '../../constants/menu';
+import { Link, useNavigate } from "react-router-dom";
+import { useAuthStore } from "../../stores/authStore";
+import * as s from "./styles";
 import { AiOutlineShopping, AiOutlineUser } from "react-icons/ai";
 import Signup from './../../pages/Signup/Signup';
 import Signin from './../../pages/Signin/Signin';
-
+import { useCategories } from "../../constants/useCategories";
+import { STATIC_MENU_ITEMS } from "../../constants/menu";
+import CategoryDropdown from "./components/CategoryDropDown/CategoryDropDown";
 
 export default function Header() {
   const navigate = useNavigate();
+  const categories = useCategories();
   const { isAuthenticated, logout } = useAuthStore();
 
   const handleLogout = () => {
@@ -31,18 +33,29 @@ export default function Header() {
             <Link to="/Signin" css={s.topBarLink}>로그인</Link>
           </>
         )}
-        <Link to="/notice" css={s.topBarLink}>공지사항</Link>
+        <Link to="/notice" css={s.topBarLink}>
+          공지사항
+        </Link>
       </div>
 
       {/* ── 2줄: 메인바 ── */}
       <div css={s.mainBar}>
-        <Link to="/" css={s.logo}>XMPY</Link>
+        <Link to="/" css={s.logo}>
+          XMPY
+        </Link>
 
         <nav css={s.nav}>
-          {MENU_ITEMS.map((menu) => (
+          {STATIC_MENU_ITEMS.map((menu) => (
             <Link key={menu.id} to={menu.path} css={s.navLink}>
               {menu.name}
             </Link>
+          ))}
+
+          {categories.map((category) => (
+            <CategoryDropdown
+              key={category.productCategoryId}
+              category={category}
+            />
           ))}
         </nav>
 
@@ -58,4 +71,3 @@ export default function Header() {
     </header>
   );
 }
-
