@@ -1,38 +1,25 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { BrowserRouter } from "react-router-dom";
+import AppRoutes from "./routes/AppRoutes";
+import { css, Global } from "@emotion/react";
 
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
-import { BrowserRouter } from 'react-router-dom'
-import AppRoutes from './routes/AppRoutes'
-import {css, Global} from "@emotion/react";
-
-
-// 전역 스타일 초기화
 const globalStyle = css`
-  /* 모든 태그 초기화 */
   * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
   }
 
-  /* index.html의 body */
-  body {
-    width: 100vw;
-    height: 100vh;
-    overflow: hidden;
+  html, body {
+    height: 100%;
   }
 
-  /* index.html에 있는 id=root div */
+  /* #root flex 중앙정렬 제거 */
   #root {
     width: 100%;
     height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
   }
-`
+`;
 
 const queryClient = new QueryClient();
 
@@ -42,11 +29,11 @@ function App() {
       {/* <Global styles={globalStyle}/> */}
       <Global styles={globalStyle} />
       <BrowserRouter>
-        <AppRoutes/>
+        <AppRoutes />
         {/* 1. AppRoutes로 먼저 들어감 */}
       </BrowserRouter>
     </QueryClientProvider>
-  )
+  );
 }
 
 export default App;

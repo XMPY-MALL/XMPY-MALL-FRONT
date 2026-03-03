@@ -1,4 +1,5 @@
 import React from "react";
+/** @jsxImportSource @emotion/react */
 import { useSigninMutation } from "./hooks/useSignin";
 import * as s from "./style";
 import { css } from "@emotion/react";
@@ -38,21 +39,23 @@ export default function Signin() {
   return (
     <div css={s.container}>
       <div css={s.signinBox}>
-        <div css={s.logoBox}>
-          <img src={logo} alt="logo" css={s.logo} />
-        </div>
-
         <h1 css={s.title}>로그인</h1>
+        <p
+          css={s.title}
+          style={{ fontSize: "14px", color: "#6B6560", marginBottom: "20px" }}
+        >
+          XMPY-MALL에 오신 것을 환영합니다
+        </p>
 
         <div css={s.formBox}>
           <div css={s.inputBox}>
-            <label>아이디(이메일)</label>
+            <label>이메일</label>
             <input
               type="text"
               value={formVal.username}
               name="email"
               onChange={handleChange}
-              placeholder="아이디를 입력하세요"
+              placeholder="이메일을 입력하세요"
             />
           </div>
 
