@@ -1,4 +1,7 @@
-const CART_KEY = "xmpyCart";
+import { useState } from "react";
+
+// hooks/useCart.js
+const CART_KEY = "xmpy_cart";
 
 const getCart = () => {
   try {
@@ -18,17 +21,38 @@ const isSameItem = (a, b) =>
   a.size.id === b.size.id;
 
 export const useCart = () => {
-  const addToCart = (newItem) => {
-    const cart = getCart();
-    const existIndex = cart.findIndex((item) => isSameItem(item, newItem));
+  const [cartItems, setCartItems] = useState(getCart());
 
+  const sync = (newCart) => {
+    saveCart(newCart);
+    setCartItems(newCart);
+  };
+
+  const addToCart = (newItem) => {
+    const existIndex = cartItems.findIndex((item) => isSameItem(item, newItem));
     if (existIndex !== -1) {
-      cart[existIndex].quantity += newItem.quantity;
-      saveCart(cart);
+      const updated = [...cartItems];
+      updated[existIndex].quantity += newItem.quantity;
+      sync(updated);
     } else {
-      saveCart([...cart, newItem]);
+      sync([...cartItems, newItem]);
     }
   };
 
-  return { addToCart };
+  const updateQuantity = (targetItem, delta) => {
+    const updated = cartItems
+      .map((item) =>
+        isSameItem(item, targetItem)
+          ? { ...item, quantity: item.quantity + delta }
+          : item,
+      )
+      .filter((item) => item.quantity > 0);
+    sync(updated);
+  };
+
+  const removeFromCart = (targetItem) => {
+    sync(cartItems.filter((item) => !isSameItem(item, targetItem)));
+  };
+
+  return { cartItems, addToCart, updateQuantity, removeFromCart };
 };

@@ -5,7 +5,7 @@ import { useForm } from "../../../../hooks/useForm";
 import * as s from "./styles";
 import { toast } from "react-toastify";
 
-export default function Order({ productName, price, id, best, imageUrls }) {
+export default function Order({ productName, price, id, best, imgUrls }) {
   const { colors, sizes } = useOrder(id);
   const { addToCart } = useCart();
   const { formVal, setFormVal } = useForm({
@@ -44,7 +44,7 @@ export default function Order({ productName, price, id, best, imageUrls }) {
       quantity: formVal.quantity,
       productName,
       price,
-      imageUrl: imageUrls[0],
+      imageUrl: imgUrls[0],
     });
 
     toast.success("장바구니에 담기 성공");
