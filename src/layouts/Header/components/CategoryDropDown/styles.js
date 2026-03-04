@@ -1,15 +1,15 @@
-// CategoryDropdown/styles.js
 import { css } from "@emotion/react";
 import { XMPY_COLORS } from "../../../../constants/colors";
 
 export const container = css`
   position: relative;
+  z-index: 100;
 `;
 
 export const navLink = css`
   display: flex;
   align-items: center;
-  height: 64px; /* mainBar 높이와 동일 */
+  height: 64px;
   font-size: 15px;
   color: ${XMPY_COLORS.GRAY_BROWN};
   letter-spacing: 0.5px;
@@ -27,7 +27,8 @@ export const dropdown = (isHovered) => css`
   top: 100%;
   left: 50%;
   transform: translateX(-50%);
-  width: 120px;
+  text-align: center;
+  width: 100px;
   background: ${XMPY_COLORS.WHITE};
   border: 1px solid ${XMPY_COLORS.LIGHT_BEIGE};
   border-top: none;
