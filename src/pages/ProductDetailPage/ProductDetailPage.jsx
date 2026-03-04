@@ -18,7 +18,13 @@ export default function ProductDetailPage() {
     <div css={s.container}>
       <div css={s.topSection}>
         <Thumbnail imgUrls={imgUrls} />
-        <Order productName={productName} price={price} id={id} best={best} />
+        <Order
+          productName={productName}
+          price={price}
+          id={id}
+          best={best}
+          imgUrls={imgUrls}
+        />
       </div>
       <div css={s.tabBar}>
         <button

@@ -1,16 +1,15 @@
 export const useOrder = (productId) => {
-  // 추후 실제 API로 교체
   return {
     colors: [
-      { label: "화이트", value: "WHITE", soldOut: false },
-      { label: "베이지", value: "BEIGE", soldOut: false },
-      { label: "네이비", value: "NAVY", soldOut: true },
+      { id: 1, label: "화이트", soldOut: false },
+      { id: 2, label: "베이지", soldOut: false },
+      { id: 3, label: "네이비", soldOut: true },
     ],
     sizes: [
-      { label: "S", value: "S", soldOut: false },
-      { label: "M", value: "M", soldOut: false },
-      { label: "L", value: "L", soldOut: false },
-      { label: "XL", value: "XL", soldOut: true },
+      { id: 1, label: "S", soldOut: false },
+      { id: 2, label: "M", soldOut: false },
+      { id: 3, label: "L", soldOut: false },
+      { id: 4, label: "XL", soldOut: true },
     ],
   };
 };
