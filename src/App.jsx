@@ -2,6 +2,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter } from "react-router-dom";
 import AppRoutes from "./routes/AppRoutes";
 import { css, Global } from "@emotion/react";
+import { ToastContainer } from "react-toastify";
 
 const globalStyle = css`
   * {
@@ -10,7 +11,8 @@ const globalStyle = css`
     box-sizing: border-box;
   }
 
-  html, body {
+  html,
+  body {
     height: 100%;
   }
 
@@ -32,6 +34,7 @@ function App() {
         <AppRoutes />
         {/* 1. AppRoutes로 먼저 들어감 */}
       </BrowserRouter>
+      <ToastContainer position="bottom-center" autoClose={2000} />
     </QueryClientProvider>
   );
 }
