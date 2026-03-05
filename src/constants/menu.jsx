@@ -2,6 +2,7 @@ import CartPage from "../pages/CartPage/CartPage";
 import Home from "../pages/Home/Home";
 import PaymentPage from "../pages/PaymentPage/PaymentPage";
 import ProductDetailPage from "../pages/ProductDetailPage/ProductDetailPage";
+import Mypage from "../pages/Mypage/Mypage";
 import Signin from "../pages/Signin/Signin";
 import Signup from "../pages/Signup/Signup";
 import SubMenuPage from "../pages/SubMenuPage/SubMenuPage";
@@ -42,4 +43,9 @@ export const PUBLIC_ROUTES = [
   { id: "home", path: "/", element: <Home /> },
   { id: "cart", path: "/cart", element: <CartPage /> },
   { id: "payment", path: "/payment", element: <PaymentPage /> },
+  {
+    id: "mypage",
+    path: "/mypage",
+    element: <Mypage/>
+  }
 ];

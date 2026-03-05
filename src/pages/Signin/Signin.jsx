@@ -17,8 +17,8 @@ export default function Signin() {
     // 위에 친구들이 initVal(매개변수)
   });
 
-  const { isPending, mutate } = useSigninMutation();
-  // 여기의 mutate가 useSignin의 mutationFn, onSucess모두 해당?
+  const { isPending, mutate, errorMessage } = useSigninMutation();
+  // mutate안에는 mutateFn, onSuccess, onError이 모두 포함되어있다
 
   // 로그인 버튼을 눌렀을때, 실행되는 코드
   const handleSignin = () => {
@@ -31,8 +31,11 @@ export default function Signin() {
           setTimeout(() => {
             window.location.href = "/";
           }, 1000);
+          // 디버깅용 (토큰) - 로그인 성공시 발급되는 토큰
         },
       },
+      // onSuccess코드를 통해
+      // useSignin.js의 onSuccess도 같이 실행된다
     );
   };
 
@@ -74,6 +77,13 @@ export default function Signin() {
             {/* disabled = {isPending} : isPending이 true면 버튼비활성화, false면 버튼활성화 */}
             {isPending ? "로그인중" : "로그인"}
           </button>
+
+          {/* 이거 추가 */}
+          {errorMessage && (
+              <p style={{ color: 'red', fontSize: '13px', textAlign: 'center', marginTop: '-10px' }}>
+                  {errorMessage}
+              </p>
+          )}
         </div>
       </div>
     </div>

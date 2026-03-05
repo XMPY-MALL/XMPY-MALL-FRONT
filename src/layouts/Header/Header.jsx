@@ -5,9 +5,15 @@ import * as s from "./styles";
 import { AiOutlineShopping, AiOutlineUser } from "react-icons/ai";
 import Signup from './../../pages/Signup/Signup';
 import Signin from './../../pages/Signin/Signin';
+<<<<<<< HEAD
 import { useCategories } from "../../constants/useCategories";
 import { STATIC_MENU_ITEMS } from "../../constants/menu";
 import CategoryDropdown from "./components/CategoryDropDown/CategoryDropDown";
+=======
+import Mypage from './../../pages/Mypage/Mypage';
+
+
+>>>>>>> 5234de0 (비밀번호/주소/전화번호 수정페이지 완료)
 
 export default function Header() {
   const navigate = useNavigate();
@@ -63,7 +69,7 @@ export default function Header() {
           <Link to="/cart" css={s.iconButton}>
             <AiOutlineShopping />
           </Link>
-          <Link to="/mypage" css={s.iconButton}>
+          <Link to="/Mypage" css={s.iconButton}>
             <AiOutlineUser />
           </Link>
         </div>
