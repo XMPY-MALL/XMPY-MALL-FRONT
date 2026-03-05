@@ -5,7 +5,7 @@ import { useKakaoPostcodePopup } from "react-daum-postcode";
 import * as s from "./styles";
 
 export default function PaymentPage() {
-  const { cartItems } = useCart();
+  const { cartItems, totalQuantity, totalPrice } = useCart();
   const { formVal, setFormVal, handleChange } = useForm({
     zonecode: "",
     address: "",
@@ -13,14 +13,8 @@ export default function PaymentPage() {
   });
   const open = useKakaoPostcodePopup();
 
-  const totalQuantity = cartItems.reduce((acc, item) => acc + item.quantity, 0);
-  const totalPrice = cartItems.reduce(
-    (acc, item) => acc + item.price * item.quantity,
-    0,
-  );
-
   const estimatedDate = new Date();
-  estimatedDate.setDate(estimatedDate.getDate() + 3);
+  estimatedDate.setDate(estimatedDate.getDate() + 3); // 기본 주문일시기준 + 3일로 잡혀있음
   const formattedDate = estimatedDate.toLocaleDateString("ko-KR", {
     year: "numeric",
     month: "2-digit",
@@ -37,6 +31,30 @@ export default function PaymentPage() {
         }));
       },
     });
+  };
+
+  const handlePayment = () => {
+    if (!formVal.address) {
+      toast.error("주소를 입력해주세요");
+      return;
+    }
+
+    const fullAddress =
+      `[${formVal.zonecode}] ${formVal.address} ${formVal.addressDetail}`.trim();
+
+    const reqDto = {
+      totalPrice,
+      address: fullAddress,
+      orderItems: cartItems.map((item) => ({
+        productId: item.productId,
+        colorId: item.color.id,
+        sizeId: item.size.id,
+        quantity: item.quantity,
+        price: item.price,
+      })),
+    };
+
+    alert(JSON.stringify(reqDto, null, 2));
   };
 
   return (
@@ -78,25 +96,10 @@ export default function PaymentPage() {
           <section css={s.section}>
             <ul css={s.itemList}>
               {cartItems.map((item) => (
-                <li
+                <PaymentItem
                   key={`${item.productId}-${item.color.id}-${item.size.id}`}
-                  css={s.item}
-                >
-                  <img
-                    src={item.imgUrl}
-                    alt={item.productName}
-                    css={s.thumbnail}
-                  />
-                  <div css={s.itemInfo}>
-                    <p css={s.itemName}>{item.productName}</p>
-                    <p css={s.itemOption}>
-                      {item.color.label} / {item.size.label} / {item.quantity}개
-                    </p>
-                  </div>
-                  <span css={s.itemPrice}>
-                    {(item.price * item.quantity).toLocaleString()}원
-                  </span>
-                </li>
+                  item={item}
+                />
               ))}
             </ul>
           </section>
@@ -121,10 +124,29 @@ export default function PaymentPage() {
               <span>총 결제 금액</span>
               <span>{totalPrice.toLocaleString()}원</span>
             </div>
-            <button css={s.payButton}>결제하기</button>
+            <button css={s.payButton} onClick={handlePayment}>
+              결제하기
+            </button>
           </div>
         </aside>
       </div>
     </div>
+  );
+}
+
+function PaymentItem({ item }) {
+  return (
+    <li css={s.item}>
+      <img src={item.imageUrl} alt={item.productName} css={s.thumbnail} />
+      <div css={s.itemInfo}>
+        <p css={s.itemName}>{item.productName}</p>
+        <p css={s.itemOption}>
+          {item.color.label} / {item.size.label} / {item.quantity}개
+        </p>
+      </div>
+      <span css={s.itemPrice}>
+        {(item.price * item.quantity).toLocaleString()}원
+      </span>
+    </li>
   );
 }

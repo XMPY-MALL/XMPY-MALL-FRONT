@@ -54,5 +54,18 @@ export const useCart = () => {
     sync(cartItems.filter((item) => !isSameItem(item, targetItem)));
   };
 
-  return { cartItems, addToCart, updateQuantity, removeFromCart };
+  const totalQuantity = cartItems.reduce((acc, item) => acc + item.quantity, 0);
+  const totalPrice = cartItems.reduce(
+    (acc, item) => acc + item.price * item.quantity,
+    0,
+  );
+
+  return {
+    cartItems,
+    addToCart,
+    updateQuantity,
+    removeFromCart,
+    totalQuantity,
+    totalPrice,
+  };
 };

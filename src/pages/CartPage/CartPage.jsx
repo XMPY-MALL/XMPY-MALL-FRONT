@@ -1,4 +1,5 @@
 /** @jsxImportSource @emotion/react */
+import { useNavigate } from "react-router-dom";
 import { useCart } from "../../hooks/useCart";
 import * as s from "./styles";
 import { FiTrash2 } from "react-icons/fi";
@@ -38,13 +39,14 @@ function CartRow({ item, onQuantity, onRemove }) {
 }
 
 export default function CartPage() {
-  const { cartItems, updateQuantity, removeFromCart } = useCart();
-
-  const totalQuantity = cartItems.reduce((acc, item) => acc + item.quantity, 0);
-  const totalPrice = cartItems.reduce(
-    (acc, item) => acc + item.price * item.quantity,
-    0,
-  );
+  const {
+    cartItems,
+    totalQuantity,
+    totalPrice,
+    updateQuantity,
+    removeFromCart,
+  } = useCart();
+  const navigator = useNavigate();
 
   return (
     <div css={s.container}>
@@ -84,7 +86,9 @@ export default function CartPage() {
       </div>
 
       <div css={s.orderButtonWrapper}>
-        <button css={s.orderButton}>주문하기</button>
+        <button css={s.orderButton} onClick={() => navigator("/payment")}>
+          주문하기
+        </button>
       </div>
     </div>
   );

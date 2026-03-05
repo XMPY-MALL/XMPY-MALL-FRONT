@@ -119,7 +119,7 @@ export const thumbnail = css`
   width: 72px;
   height: 72px;
   object-fit: cover;
-  background: ${XMPY_COLORS.LIGHT_BEIGE};
+  background: ${XMPY_COLORS.WHITE};
 `;
 
 export const itemInfo = css`
