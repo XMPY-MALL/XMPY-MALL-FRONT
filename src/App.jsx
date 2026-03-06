@@ -34,7 +34,13 @@ function App() {
         <AppRoutes />
         {/* 1. AppRoutes로 먼저 들어감 */}
       </BrowserRouter>
-      <ToastContainer position="bottom-center" autoClose={2000} />
+      <ToastContainer
+        position="top-center"
+        autoClose={2000}
+        style={{
+          top: "10%",
+        }}
+      />
     </QueryClientProvider>
   );
 }

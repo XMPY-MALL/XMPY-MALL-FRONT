@@ -6,6 +6,7 @@ import Mypage from "../pages/Mypage/Mypage";
 import Signin from "../pages/Signin/Signin";
 import Signup from "../pages/Signup/Signup";
 import SubMenuPage from "../pages/SubMenuPage/SubMenuPage";
+import AddProduct from "../pages/AddProduct/AddProduct";
 
 // 상단 header navbar 일반메뉴들
 
@@ -41,11 +42,22 @@ export const PUBLIC_ROUTES = [
     element: <Signup />,
   },
   { id: "home", path: "/", element: <Home /> },
-  { id: "cart", path: "/cart", element: <CartPage /> },
-  { id: "payment", path: "/payment", element: <PaymentPage /> },
+];
+
+export const USER_ROUTES = [
   {
     id: "mypage",
     path: "/mypage",
-    element: <Mypage/>
-  }
+    element: <Mypage />,
+  },
+  { id: "cart", path: "/cart", element: <CartPage /> },
+  { id: "payment", path: "/payment", element: <PaymentPage /> },
+];
+
+export const ADMIN_ROUTES = [
+  {
+    id: "addProduct",
+    path: "/product/add",
+    element: <AddProduct />,
+  },
 ];
