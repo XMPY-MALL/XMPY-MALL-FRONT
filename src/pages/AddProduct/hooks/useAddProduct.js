@@ -1,5 +1,7 @@
 import { useForm } from "../../../hooks/useForm";
 import { useCategories } from "../../../constants/useCategories";
+import { useProductImages } from "./useProductImage";
+import { useUploadImages } from "./useUploadImages";
 import { useState } from "react";
 
 export const useAddProduct = () => {
@@ -11,6 +13,14 @@ export const useAddProduct = () => {
     description: "",
     price: "",
   });
+
+  // 이미지
+  const {
+    images,
+    handleChange: handleImageChange,
+    handleDelete,
+  } = useProductImages();
+  const { uploadImages } = useUploadImages();
 
   // 카테고리
   const [selectedCategoryId, setSelectedCategoryId] = useState(null);
@@ -44,9 +54,11 @@ export const useAddProduct = () => {
     );
 
   // 제출
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
+    const imageUrls = await uploadImages(images);
     const dto = {
       ...formVal,
+      imageUrls,
       selectedCategoryId,
       selectedSubCategoryId,
       stocks,
@@ -58,6 +70,10 @@ export const useAddProduct = () => {
     // 기본 정보
     formVal,
     handleChange,
+    // 이미지
+    images,
+    handleImageChange,
+    handleDelete,
     // 카테고리
     categories,
     selectedCategoryId,
