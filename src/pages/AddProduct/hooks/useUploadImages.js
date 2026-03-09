@@ -1,8 +1,6 @@
 // useUploadImages.js
 import { v4 as uuidv4 } from "uuid";
-import { supabase } from "../../../supabase/supabase";
-
-const BUCKET_NAME = "products";
+import { supabase, BUCKET_NAME } from "../../../supabase/supabase";
 
 export const useUploadImages = () => {
   const uploadImages = async (images) => {
