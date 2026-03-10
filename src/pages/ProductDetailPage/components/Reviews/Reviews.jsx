@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { useReviews } from "../../hooks/useReviews";
+import Spinner from "../../../../components/Spinner/Spinner";
 import * as s from "./styles";
 
 export default function Reviews({ id }) {
@@ -21,9 +22,14 @@ export default function Reviews({ id }) {
           </li>
         ))}
       </ul>
-      {hasMore && (
-        <button css={s.moreButton} onClick={loadMore} disabled={isFetching}>
-          {isFetching ? "로딩 중..." : "더보기"}
+      {isFetching && (
+        <div css={s.spinnerWrapper}>
+          <Spinner size={36} />
+        </div>
+      )}
+      {hasMore && !isFetching && (
+        <button css={s.moreButton} onClick={loadMore}>
+          더보기
         </button>
       )}
     </div>

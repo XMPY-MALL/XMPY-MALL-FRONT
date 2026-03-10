@@ -8,6 +8,7 @@ export const useReviews = (productId) => {
   console.log("useReviews 호출됨", productId); // ← 추가
   const [offset, setOffset] = useState(0);
   const [accReviews, setAccReviews] = useState([]);
+  const [showSpinner, setShowSpinner] = useState(false);
 
   const { data, isFetching } = useQuery({
     queryKey: ["reviews", productId, offset],
@@ -31,5 +32,11 @@ export const useReviews = (productId) => {
     if (!isFetching && hasMore) setOffset((prev) => prev + PAGE_SIZE);
   };
 
-  return { reviews: accReviews, total, hasMore, isFetching, loadMore };
+  return {
+    reviews: accReviews,
+    total,
+    hasMore,
+    isFetching: showSpinner,
+    loadMore,
+  };
 };
