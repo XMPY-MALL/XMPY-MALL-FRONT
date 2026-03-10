@@ -64,7 +64,7 @@ export const useAddProduct = () => {
       stocks,
       detailContent,
     };
-    alert(JSON.stringify(dto, null, 2));
+    console.log(JSON.stringify(dto, null, 2));
   };
 
   return {
