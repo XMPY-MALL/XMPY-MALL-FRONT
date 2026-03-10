@@ -1,6 +1,6 @@
 import { useState } from "react";
 import styles from "./UserPage.module.css";
-import OrderList from "./UserPageTabs/OrderList";
+import OrderList from "./UserPageTabs/OrderList/OrderList";
 import ReviewWrite from "./UserPageTabs/ReviewWrite";
 import UserInfo from "./UserPageTabs/UserInfo/UserInfo";
 
