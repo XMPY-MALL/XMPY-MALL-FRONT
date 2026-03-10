@@ -7,6 +7,7 @@ import Signin from "../pages/Signin/Signin";
 import Signup from "../pages/Signup/Signup";
 import SubMenuPage from "../pages/SubMenuPage/SubMenuPage";
 import AddProduct from "../pages/AddProduct/AddProduct";
+import Best from "../pages/Best/Best";
 
 // 상단 header navbar 일반메뉴들
 
@@ -15,7 +16,7 @@ export const STATIC_MENU_ITEMS = [
     id: 1,
     name: "BEST",
     path: "/best",
-    element: <>베스트상품들</>,
+    element: <Best />,
   },
 ];
 
