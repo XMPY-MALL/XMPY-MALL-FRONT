@@ -3,7 +3,7 @@ import { useReviews } from "../../hooks/useReviews";
 import * as s from "./styles";
 
 export default function Reviews({ id }) {
-  const { visibleReviews, hasMore, loadMore } = useReviews(id);
+  const { reviews, hasMore, loadMore, isFetching } = useReviews(id);
 
   return (
     <div css={s.container}>
@@ -11,7 +11,7 @@ export default function Reviews({ id }) {
         <h2 css={s.title}>상품 후기</h2>
       </div>
       <ul css={s.list}>
-        {visibleReviews.map(({ reviewId, userName, content, createdAt }) => (
+        {reviews.map(({ reviewId, userName, content, createdAt }) => (
           <li key={reviewId} css={s.item}>
             <div css={s.itemTop}>
               <span css={s.userName}>{userName}</span>
@@ -22,8 +22,8 @@ export default function Reviews({ id }) {
         ))}
       </ul>
       {hasMore && (
-        <button css={s.moreButton} onClick={loadMore}>
-          더보기
+        <button css={s.moreButton} onClick={loadMore} disabled={isFetching}>
+          {isFetching ? "로딩 중..." : "더보기"}
         </button>
       )}
     </div>

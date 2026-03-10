@@ -9,9 +9,9 @@ import { useState } from "react";
 import * as s from "./styles";
 
 export default function ProductDetailPage() {
-  const { id } = useParams();
+  const { productId } = useParams();
   const { best, imgUrls, price, productDetailContent, productName } =
-    useProduct(id);
+    useProduct(productId);
   const [activeTab, setActiveTab] = useState("detail");
 
   return (
@@ -21,7 +21,7 @@ export default function ProductDetailPage() {
         <Order
           productName={productName}
           price={price}
-          id={id}
+          id={productId}
           best={best}
           imgUrls={imgUrls}
         />
@@ -45,7 +45,7 @@ export default function ProductDetailPage() {
       {activeTab === "detail" ? (
         <ProductDetail productDetailContent={productDetailContent} />
       ) : (
-        <Reviews id={id} />
+        <Reviews id={productId} />
       )}
     </div>
   );
