@@ -3,6 +3,9 @@ import { useCategories } from "../../../constants/useCategories";
 import { useProductImages } from "./useProductImage";
 import { useUploadImages } from "./useUploadImages";
 import { useState } from "react";
+import { useMutation } from "@tanstack/react-query";
+import { addProductAPI } from "../../../apis/endpoints/product";
+import { toast } from "react-toastify";
 
 export const useAddProduct = () => {
   const categories = useCategories();
@@ -53,7 +56,16 @@ export const useAddProduct = () => {
       prev.map((s, i) => (i === index ? { ...s, [field]: value } : s)),
     );
 
-  // 제출
+  const { mutate: addProduct, isPending } = useMutation({
+    mutationFn: addProductAPI,
+    onSuccess: () => {
+      toast.success("상품 등록 완료");
+    },
+    onError: () => {
+      toast.error("상품 등록 실패");
+    },
+  });
+
   const handleSubmit = async (detailContent) => {
     const imageUrls = await uploadImages(images);
     const dto = {
@@ -64,7 +76,7 @@ export const useAddProduct = () => {
       stocks,
       detailContent,
     };
-    console.log(JSON.stringify(dto, null, 2));
+    addProduct(dto);
   };
 
   return {
@@ -88,6 +100,7 @@ export const useAddProduct = () => {
     removeStock,
     updateStock,
     // 제출
+    isPending,
     handleSubmit,
   };
 };

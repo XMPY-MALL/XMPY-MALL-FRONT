@@ -26,6 +26,7 @@ export default function AddProduct() {
     addStock,
     removeStock,
     updateStock,
+    isPending,
     handleSubmit,
   } = useAddProduct();
 
@@ -74,8 +75,9 @@ export default function AddProduct() {
         css={s.submitButtonStyle}
         type="button"
         onClick={() => handleSubmit(detailContent)}
+        disabled={isPending}
       >
-        등록
+        {isPending ? "등록 중..." : "등록"}
       </button>
     </section>
   );
