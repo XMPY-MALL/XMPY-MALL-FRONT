@@ -35,8 +35,10 @@ export default function StockManagePage() {
   const [colorOptions, setColorOptions] = useState([]);
   const [loadingProducts, setLoadingProducts] = useState(true);
   const [loadingStocks, setLoadingStocks] = useState(false);
+
   const [editingStockId, setEditingStockId] = useState(null);
   const [editingCount, setEditingCount] = useState(0);
+
   const [addingMode, setAddingMode] = useState(false);
   const [newOptionForm, setNewOptionForm] = useState({
     sizeId: "",
@@ -45,22 +47,40 @@ export default function StockManagePage() {
   });
 
   const normalizedProductList = useMemo(() => {
-    return productList.map((product) => ({
-      ...product,
-      categoryName: CATEGORY_NAME_MAP[product.categoryId] || "기타",
-    }));
+    return (Array.isArray(productList) ? productList : []).map((product) => {
+      const productId = product.productId ?? product.product_id;
+      const productName = product.productName ?? product.product_name;
+      const imgUrl = product.imgUrl ?? product.img_url;
+      const price = product.price ?? 0;
+      const categoryId = product.categoryId ?? product.category_id;
+
+      return {
+        ...product,
+        productId,
+        productName,
+        imgUrl,
+        price,
+        categoryId,
+        categoryName: CATEGORY_NAME_MAP[Number(categoryId)] || "기타",
+      };
+    });
   }, [productList]);
 
   const filteredProducts = useMemo(() => {
     if (categoryFilter === "all") return normalizedProductList;
+
     return normalizedProductList.filter(
       (product) => Number(product.categoryId) === Number(categoryFilter)
     );
   }, [categoryFilter, normalizedProductList]);
 
   const selectedProduct =
-    filteredProducts.find((product) => product.productId === selectedProductId) ||
-    normalizedProductList.find((product) => product.productId === selectedProductId) ||
+    filteredProducts.find(
+      (product) => Number(product.productId) === Number(selectedProductId)
+    ) ||
+    normalizedProductList.find(
+      (product) => Number(product.productId) === Number(selectedProductId)
+    ) ||
     null;
 
   const totalStock = useMemo(() => {
@@ -68,17 +88,32 @@ export default function StockManagePage() {
   }, [stockList]);
 
   const soldOutCount = useMemo(() => {
-    return stockList.filter((stock) => Number(stock.count) === 0).length;
+    return stockList.filter((stock) => {
+      const soldOutValue = stock.soldOut ?? stock.isSoldOut;
+      return Boolean(soldOutValue) || Number(stock.count) === 0;
+    }).length;
   }, [stockList]);
+
+  const resetAddMode = () => {
+    setAddingMode(false);
+    setNewOptionForm({
+      sizeId: "",
+      colorId: "",
+      count: 0,
+    });
+  };
 
   const loadProductList = async () => {
     try {
       setLoadingProducts(true);
       const data = await getProductListAPI();
-      setProductList(Array.isArray(data) ? data : []);
+      const safeData = Array.isArray(data) ? data : [];
 
-      if (Array.isArray(data) && data.length > 0) {
-        setSelectedProductId((prev) => prev ?? data[0].productId);
+      setProductList(safeData);
+
+      if (safeData.length > 0) {
+        const firstProductId = safeData[0].productId ?? safeData[0].product_id;
+        setSelectedProductId((prev) => prev ?? firstProductId);
       }
     } catch (error) {
       console.error("상품 목록 조회 실패", error);
@@ -87,6 +122,7 @@ export default function StockManagePage() {
       setLoadingProducts(false);
     }
   };
+
   const loadStockList = async (productId) => {
     if (!productId) return;
 
@@ -132,7 +168,7 @@ export default function StockManagePage() {
     }
 
     const exists = filteredProducts.some(
-      (product) => product.productId === selectedProductId
+      (product) => Number(product.productId) === Number(selectedProductId)
     );
 
     if (!exists) {
@@ -143,19 +179,21 @@ export default function StockManagePage() {
   const handleCategoryChange = (categoryKey) => {
     setCategoryFilter(categoryKey);
     setEditingStockId(null);
-    setAddingMode(false);
+    setEditingCount(0);
+    resetAddMode();
   };
 
   const handleSelectProduct = (productId) => {
     setSelectedProductId(productId);
     setEditingStockId(null);
-    setAddingMode(false);
+    setEditingCount(0);
+    resetAddMode();
   };
 
   const handleStartEdit = (stock) => {
-    setAddingMode(false);
+    resetAddMode();
     setEditingStockId(stock.stockId);
-    setEditingCount(stock.count);
+    setEditingCount(Number(stock.count || 0));
   };
 
   const handleCancelEdit = () => {
@@ -168,7 +206,9 @@ export default function StockManagePage() {
       await updateProductStockAPI(stockId, {
         count: Number(editingCount),
       });
+
       setEditingStockId(null);
+      setEditingCount(0);
       await loadStockList(selectedProductId);
     } catch (error) {
       console.error("재고 수정 실패", error);
@@ -191,6 +231,7 @@ export default function StockManagePage() {
 
   const handleStartAdd = () => {
     setEditingStockId(null);
+    setEditingCount(0);
     setAddingMode(true);
     setNewOptionForm({
       sizeId: "",
@@ -221,13 +262,7 @@ export default function StockManagePage() {
         count: Number(newOptionForm.count),
       });
 
-      setAddingMode(false);
-      setNewOptionForm({
-        sizeId: "",
-        colorId: "",
-        count: 0,
-      });
-
+      resetAddMode();
       await loadStockList(selectedProductId);
     } catch (error) {
       console.error("옵션 추가 실패", error);
@@ -268,7 +303,7 @@ export default function StockManagePage() {
                   key={product.productId}
                   type="button"
                   css={s.productCardStyle(
-                    selectedProduct?.productId === product.productId
+                    Number(selectedProduct?.productId) === Number(product.productId)
                   )}
                   onClick={() => handleSelectProduct(product.productId)}
                 >
@@ -287,7 +322,8 @@ export default function StockManagePage() {
                   <div css={s.productMetaStyle}>
                     <p css={s.productNameStyle}>{product.productName}</p>
                     <p css={s.productInfoStyle}>
-                      {product.categoryName} / {Number(product.price).toLocaleString()}원
+                      {product.categoryName} /{" "}
+                      {Number(product.price).toLocaleString()}원
                     </p>
                   </div>
                 </button>
@@ -298,7 +334,11 @@ export default function StockManagePage() {
 
         <div css={s.mainPanelStyle}>
           <div css={s.topActionStyle}>
-            <button type="button" css={s.addOptionButtonStyle} onClick={handleStartAdd}>
+            <button
+              type="button"
+              css={s.addOptionButtonStyle}
+              onClick={handleStartAdd}
+            >
               <IoAdd />
               옵션 추가
             </button>
@@ -307,9 +347,12 @@ export default function StockManagePage() {
           {selectedProduct ? (
             <>
               <div css={s.productHeaderStyle}>
-                <h2 css={s.selectedProductNameStyle}>{selectedProduct.productName}</h2>
+                <h2 css={s.selectedProductNameStyle}>
+                  {selectedProduct.productName}
+                </h2>
                 <p css={s.selectedProductInfoStyle}>
-                  {selectedProduct.categoryName} / {Number(selectedProduct.price).toLocaleString()}원
+                  {selectedProduct.categoryName} /{" "}
+                  {Number(selectedProduct.price).toLocaleString()}원
                 </p>
               </div>
 
@@ -374,6 +417,7 @@ export default function StockManagePage() {
                         onChange={(e) =>
                           handleChangeNewOptionForm("count", e.target.value)
                         }
+                        placeholder="재고 수량"
                       />
 
                       <span css={s.statusTextStyle(Number(newOptionForm.count) === 0)}>
@@ -381,10 +425,18 @@ export default function StockManagePage() {
                       </span>
 
                       <div css={s.actionButtonsStyle}>
-                        <button type="button" css={s.lineButtonStyle} onClick={handleAddOption}>
-                          저장
+                        <button
+                          type="button"
+                          css={s.lineButtonStyle}
+                          onClick={handleAddOption}
+                        >
+                          추가
                         </button>
-                        <button type="button" css={s.lineButtonStyle} onClick={() => setAddingMode(false)}>
+                        <button
+                          type="button"
+                          css={s.lineButtonStyle}
+                          onClick={resetAddMode}
+                        >
                           취소
                         </button>
                       </div>
@@ -397,20 +449,25 @@ export default function StockManagePage() {
                     <div css={s.emptyBoxStyle}>등록된 옵션이 없습니다.</div>
                   ) : (
                     stockList.map((stock) => {
-                      const isSoldOut = Number(stock.count) === 0;
+                      const soldOutValue = stock.soldOut ?? stock.isSoldOut;
+                      const isSoldOut =
+                        Boolean(soldOutValue) || Number(stock.count) === 0;
+                      const isEditing = editingStockId === stock.stockId;
 
                       return (
                         <div key={stock.stockId} css={s.tableRowStyle}>
                           <span css={s.tableTextStyle}>{stock.colorName}</span>
                           <span css={s.tableTextStyle}>{stock.sizeName}</span>
 
-                          {editingStockId === stock.stockId ? (
+                          {isEditing ? (
                             <input
                               css={s.editInputStyle}
                               type="number"
                               min="0"
                               value={editingCount}
-                              onChange={(e) => setEditingCount(Number(e.target.value))}
+                              onChange={(e) =>
+                                setEditingCount(Number(e.target.value))
+                              }
                             />
                           ) : (
                             <span css={s.tableTextStyle}>{stock.count}</span>
@@ -418,12 +475,10 @@ export default function StockManagePage() {
 
                           <span
                             css={s.statusTextStyle(
-                              editingStockId === stock.stockId
-                                ? Number(editingCount) === 0
-                                : isSoldOut
+                              isEditing ? Number(editingCount) === 0 : isSoldOut
                             )}
                           >
-                            {editingStockId === stock.stockId
+                            {isEditing
                               ? Number(editingCount) === 0
                                 ? "품절"
                                 : "정상"
@@ -433,18 +488,30 @@ export default function StockManagePage() {
                           </span>
 
                           <div css={s.actionButtonsStyle}>
-                            {editingStockId === stock.stockId ? (
+                            {isEditing ? (
                               <>
-                                <button type="button" css={s.lineButtonStyle} onClick={() => handleSaveEdit(stock.stockId)}>
+                                <button
+                                  type="button"
+                                  css={s.lineButtonStyle}
+                                  onClick={() => handleSaveEdit(stock.stockId)}
+                                >
                                   저장
                                 </button>
-                                <button type="button" css={s.lineButtonStyle} onClick={handleCancelEdit}>
+                                <button
+                                  type="button"
+                                  css={s.lineButtonStyle}
+                                  onClick={handleCancelEdit}
+                                >
                                   취소
                                 </button>
                               </>
                             ) : (
                               <>
-                                <button type="button" css={s.lineButtonStyle} onClick={() => handleStartEdit(stock)}>
+                                <button
+                                  type="button"
+                                  css={s.lineButtonStyle}
+                                  onClick={() => handleStartEdit(stock)}
+                                >
                                   수정
                                 </button>
                                 <button
