@@ -54,7 +54,7 @@ export const useAddProduct = () => {
     );
 
   // 제출
-  const handleSubmit = async () => {
+  const handleSubmit = async (detailContent) => {
     const imageUrls = await uploadImages(images);
     const dto = {
       ...formVal,
@@ -62,6 +62,7 @@ export const useAddProduct = () => {
       selectedCategoryId,
       selectedSubCategoryId,
       stocks,
+      detailContent,
     };
     alert(JSON.stringify(dto, null, 2));
   };

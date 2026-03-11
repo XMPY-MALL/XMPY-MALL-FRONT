@@ -1,5 +1,7 @@
 /** @jsxImportSource @emotion/react */
+import { useState } from "react";
 import { useAddProduct } from "./hooks/useAddProduct";
+import { useQuillEditor } from "../../quill/useQuillEditor";
 import ProductImagePlaceHolder from "./components/ProductImagePlaceHolder/ProductImagePlaceHolder";
 import ProductInfoInputs from "./components/ProductInfoInputs/ProductInfoInputs";
 import ProductCategories from "./components/ProductCategories/ProductCategories";
@@ -26,6 +28,9 @@ export default function AddProduct() {
     updateStock,
     handleSubmit,
   } = useAddProduct();
+
+  const { quillRef, modules } = useQuillEditor();
+  const [detailContent, setDetailContent] = useState("");
 
   return (
     <section css={s.containerStyle}>
@@ -58,9 +63,18 @@ export default function AddProduct() {
         </div>
       </div>
 
-      <ProductDetailInputs />
+      <ProductDetailInputs
+        quillRef={quillRef}
+        modules={modules}
+        detailContent={detailContent}
+        onChange={setDetailContent}
+      />
 
-      <button css={s.submitButtonStyle} type="button" onClick={handleSubmit}>
+      <button
+        css={s.submitButtonStyle}
+        type="button"
+        onClick={() => handleSubmit(detailContent)}
+      >
         등록
       </button>
     </section>

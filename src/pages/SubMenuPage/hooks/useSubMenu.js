@@ -95,3 +95,30 @@ export const useSubMenu = (categoryDetailId, page) => {
     ],
   };
 };
+
+[
+  {
+    categoryName: "상의",
+    products: [
+      {
+        productId: 8,
+        categoryDetailName: "셔츠",
+        productName: "루즈핏 셔츠",
+        price: 69000,
+        thumbnailUrl:
+          "https://lookple.com/web/product/extra/big/202409/753cda836d7a089cd651b6358f0ba23c.png",
+        best: false,
+        soldOut: false,
+        reviewCount: 5,
+      },
+    ],
+  },
+  {
+    categoryName: "하의",
+    products: [{}],
+  },
+  {
+    categoryName: "아우터",
+    products: [{}],
+  },
+];
