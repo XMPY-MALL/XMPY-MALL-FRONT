@@ -3,6 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import MainLayout from "../layouts/MainLayout/MainLayout";
 import { ADMIN_ROUTES, PUBLIC_ROUTES, USER_ROUTES } from "../constants/menu";
 import UserRoute from "./UserRoute";
+import Best from "../pages/Best/Best";
 
 export default function AppRoutes() {
   return (
@@ -28,6 +29,7 @@ export default function AppRoutes() {
             <Route key={route.id} path={route.path} element={route.element} />
           );
         })}
+        <Route path="/best" element={<Best />} />
       </Route>
     </Routes>
   );
