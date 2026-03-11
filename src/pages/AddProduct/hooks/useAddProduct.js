@@ -1,5 +1,5 @@
 import { useForm } from "../../../hooks/useForm";
-import { useCategories } from "../../../constants/useCategories";
+import { useCategories } from "../../../hooks/useCategories";
 import { useProductImages } from "./useProductImage";
 import { useUploadImages } from "./useUploadImages";
 import { useState } from "react";
