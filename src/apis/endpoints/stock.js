@@ -8,37 +8,40 @@ export const getProductListAPI = async () => {
 
 // 특정 상품 재고 조회
 export const getProductStocksAPI = async (productId) => {
-  const response = await instance.get(`/admin/products/${productId}/stocks`);
+  const response = await instance.get(`stocks/admin/products/${productId}`);
   return response.data;
 };
 
 // 사이즈 목록 조회
 export const getSizesAPI = async () => {
-  const response = await instance.get("/sizes");
+  const response = await instance.get("/stocks/sizes");
   return response.data;
 };
 
 // 색상 목록 조회
 export const getColorsAPI = async () => {
-  const response = await instance.get("/colors");
+  const response = await instance.get("/stocks/colors");
   return response.data;
 };
 
 // 옵션 추가
 export const addProductStockAPI = async (productId, dto) => {
-  const response = await instance.post(`/admin/products/${productId}/stocks`, dto);
+  const response = await instance.post(
+    `stocks/admin/products/${productId}/stocks`,
+    dto,
+  );
   return response.data;
 };
 
 // 재고 수정
 export const updateProductStockAPI = async (stockId, dto) => {
-  const response = await instance.put(`/admin/stocks/${stockId}`, dto);
+  const response = await instance.put(`stocks/admin/stocks/${stockId}`, dto);
   return response.data;
 };
 
 // 옵션 삭제
 export const deleteProductStockAPI = async (stockId) => {
-  const response = await instance.delete(`/admin/stocks/${stockId}`);
+  const response = await instance.delete(`stocks/admin/stocks/${stockId}`);
   return response.data;
 };
 
