@@ -2,6 +2,7 @@ import { useForm } from "../../../hooks/useForm";
 import { useCategories } from "../../../constants/useCategories";
 import { useProductImages } from "./useProductImage";
 import { useUploadImages } from "./useUploadImages";
+import { createProduct } from "../../../apis/endpoints/product";
 import { useState } from "react";
 
 export const useAddProduct = () => {
@@ -64,7 +65,8 @@ export const useAddProduct = () => {
       stocks,
       detailContent,
     };
-    alert(JSON.stringify(dto, null, 2));
+    await createProduct(dto);
+    alert("상품이 등록되었습니다.");
   };
 
   return {

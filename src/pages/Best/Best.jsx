@@ -19,7 +19,11 @@ export default function Best({ title = "베스트상품", limit = 4 }) {
         try {
             setLoading(true);
             const data = await fetchBestProducts();
-            setBestData(Array.isArray(data) ? data : []);
+            const list = Array.isArray(data) ? data : [];
+            setBestData(list);
+            if (list.length === 0) {
+                toast.info("현재 등록된 베스트 상품이 없습니다.");
+            }
         } catch (e) {
             toast.error("베스트 상품을 불러오지 못했습니다.");
             setBestData([]);

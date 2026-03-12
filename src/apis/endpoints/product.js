@@ -38,6 +38,6 @@ export async function createProduct(data) {
 
 // 베스트 상품 조회
 export async function fetchBestProducts() {
-    const response = await instance.get("/products/best");
+    const response = await instance.get("/product/best");
     return response.data;
 }
