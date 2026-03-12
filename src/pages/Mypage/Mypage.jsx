@@ -4,7 +4,6 @@ import UserPage from "./pages/UserPage";
 import OwnerPage from "./pages/OwnerPage";
 
 export default function Mypage() {
-  return <UserPage />;
   const accessToken = localStorage.getItem("accessToken");
   // 아하 localStorage를 이런식으로 활용하는 거구나!!
 
@@ -26,6 +25,8 @@ export default function Mypage() {
         {sub: '8', iat: 1772335787, exp: 1772337587, role: 1}
         이런식으로 토큰을 분해시키는 라이브러리
     */
+
+  console.log(decoded);
   if (decoded.role === 1) {
     return <UserPage />;
     // 만약 role_id가 1이면, UserPage로 이동

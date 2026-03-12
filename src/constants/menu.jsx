@@ -8,6 +8,7 @@ import Signup from "../pages/Signup/Signup";
 import SubMenuPage from "../pages/SubMenuPage/SubMenuPage";
 import AddProduct from "../pages/AddProduct/AddProduct";
 import Best from "../pages/Best/Best";
+import StockManagePage from "../pages/StockManagePage/StockManagePage";
 
 // 상단 header navbar 일반메뉴들
 
@@ -43,6 +44,7 @@ export const PUBLIC_ROUTES = [
     element: <Signup />,
   },
   { id: "home", path: "/", element: <Home /> },
+  { id: "best", path: "/best", element: <Best /> },
 ];
 
 export const USER_ROUTES = [
@@ -60,5 +62,10 @@ export const ADMIN_ROUTES = [
     id: "addProduct",
     path: "/product/add",
     element: <AddProduct />,
+  },
+  {
+    id: "manageStock",
+    path: "/stock/manage",
+    element: <StockManagePage />,
   },
 ];

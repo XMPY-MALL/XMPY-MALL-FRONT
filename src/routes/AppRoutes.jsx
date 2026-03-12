@@ -5,7 +5,7 @@ import { ADMIN_ROUTES, PUBLIC_ROUTES, USER_ROUTES } from "../constants/menu";
 import UserRoute from "./UserRoute";
 import StockManagePage from "../pages/StockManagePage/StockManagePage";
 import Best from "../pages/Best/Best";
-
+import AdminRoute from "./AdminRoute";
 
 export default function AppRoutes() {
   return (
@@ -27,15 +27,13 @@ export default function AppRoutes() {
             );
           })}
         </Route>
-
-        {ADMIN_ROUTES.map((route) => {
-          return (
-            <Route key={route.id} path={route.path} element={route.element} />
-          );
-        })}
-        <Route path="/stock/manage" element={<StockManagePage />} />
-        <Route path="/best" element={<Best />} />
-
+        <Route element={<AdminRoute />}>
+          {ADMIN_ROUTES.map((route) => {
+            return (
+              <Route key={route.id} path={route.path} element={route.element} />
+            );
+          })}
+        </Route>
       </Route>
     </Routes>
   );

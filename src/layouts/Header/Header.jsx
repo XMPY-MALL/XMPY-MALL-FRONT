@@ -18,7 +18,7 @@ export default function Header() {
 
   const handleLogout = () => {
     logout();
-    navigate("/");
+    window.location.href = "/";
   };
 
   useEffect(() => {

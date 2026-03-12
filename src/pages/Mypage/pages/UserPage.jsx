@@ -4,8 +4,14 @@ import OrderList from "./UserPageTabs/OrderList/OrderList";
 import ReviewWrite from "./UserPageTabs/ReviewWrite";
 import UserInfo from "./UserPageTabs/UserInfo/UserInfo";
 
+const tabMenu = {
+  0: "주문내역",
+  1: "리뷰작성",
+  2: "개인정보작성",
+};
+
 const UserPage = () => {
-  const [activeTab, setActiveTab] = useState("개인 정보 수정");
+  const [activeTab, setActiveTab] = useState(tabMenu[0]);
 
   return (
     <div className={styles.container}>
@@ -16,8 +22,8 @@ const UserPage = () => {
 
       <div className={styles.tabMenu}>
         <span
-          className={`${styles.tabItem} ${activeTab === "주문내역" ? styles.active : ""}`}
-          onClick={() => setActiveTab("주문내역")}
+          className={`${styles.tabItem} ${activeTab === tabMenu[0] ? styles.active : ""}`}
+          onClick={() => setActiveTab(tabMenu[0])}
         >
           주문 내역
         </span>
@@ -29,14 +35,14 @@ const UserPage = () => {
                     false면 "빈문자열"을 추가한다
                 */}
         <span
-          className={`${styles.tabItem} ${activeTab === "리뷰작성" ? styles.active : ""}`}
-          onClick={() => setActiveTab("리뷰작성")}
+          className={`${styles.tabItem} ${activeTab === tabMenu[1] ? styles.active : ""}`}
+          onClick={() => setActiveTab(tabMenu[1])}
         >
           리뷰 작성
         </span>
         <span
-          className={`${styles.tabItem} ${activeTab === "개인정보수정" ? styles.active : ""}`}
-          onClick={() => setActiveTab("개인정보수정")}
+          className={`${styles.tabItem} ${activeTab === tabMenu[2] ? styles.active : ""}`}
+          onClick={() => setActiveTab(tabMenu[2])}
         >
           개인 정보 수정
         </span>
