@@ -1,6 +1,5 @@
 import instance from "../instance";
 
-<<<<<<< HEAD
 // 상품 전체 조회
 export const getProductListAPI = async () => {
   const response = await instance.get("/product");
@@ -42,11 +41,10 @@ export const deleteProductStockAPI = async (stockId) => {
   const response = await instance.delete(`/admin/stocks/${stockId}`);
   return response.data;
 };
-=======
+
 export const getStocksAPI = async (productId) => {
   const { data } = await instance.get("/stocks", {
     params: { productId },
   });
   return data;
 };
->>>>>>> 35b11ad39c6af87a3099d79cf3b084d04584e6e3
