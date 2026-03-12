@@ -55,7 +55,7 @@ export default function Signin() {
             <label>이메일</label>
             <input
               type="text"
-              value={formVal.email}
+              value={formVal.username}
               name="email"
               onChange={handleChange}
               placeholder="이메일을 입력하세요"
@@ -80,9 +80,16 @@ export default function Signin() {
 
           {/* 이거 추가 */}
           {errorMessage && (
-              <p style={{ color: 'red', fontSize: '13px', textAlign: 'center', marginTop: '-10px' }}>
-                  {errorMessage}
-              </p>
+            <p
+              style={{
+                color: "red",
+                fontSize: "13px",
+                textAlign: "center",
+                marginTop: "-10px",
+              }}
+            >
+              {errorMessage}
+            </p>
           )}
         </div>
       </div>
