@@ -1,5 +1,16 @@
-import instance from "../instance.js";
-// axios 공용 설정 파일 임폴트
+import instance from "../instance";
+
+export const addProductAPI = async (dto) => {
+  const { data } = await instance.post("/product", dto);
+  return data;
+};
+
+export const getSubMenuAPI = async (categoryDetailId, page) => {
+  const { data } = await instance.get(`/product/detail/${categoryDetailId}`, {
+    params: { page },
+  });
+  return data;
+};
 
 // 전체 상품목록 조회
 export async function fetchProductList(params = {}) {
@@ -38,6 +49,6 @@ export async function createProduct(data) {
 
 // 베스트 상품 조회
 export async function fetchBestProducts() {
-    const response = await instance.get("/products/best");
+    const response = await instance.get("/product/best");
     return response.data;
 }
