@@ -1,9 +1,10 @@
 /** @jsxImportSource @emotion/react */
 import { useReviews } from "../../hooks/useReviews";
+import Spinner from "../../../../components/Spinner/Spinner";
 import * as s from "./styles";
 
 export default function Reviews({ id }) {
-  const { visibleReviews, hasMore, loadMore } = useReviews(id);
+  const { reviews, hasMore, loadMore, isFetching } = useReviews(id);
 
   return (
     <div css={s.container}>
@@ -11,7 +12,7 @@ export default function Reviews({ id }) {
         <h2 css={s.title}>상품 후기</h2>
       </div>
       <ul css={s.list}>
-        {visibleReviews.map(({ reviewId, userName, content, createdAt }) => (
+        {reviews.map(({ reviewId, userName, content, createdAt }) => (
           <li key={reviewId} css={s.item}>
             <div css={s.itemTop}>
               <span css={s.userName}>{userName}</span>
@@ -21,7 +22,12 @@ export default function Reviews({ id }) {
           </li>
         ))}
       </ul>
-      {hasMore && (
+      {isFetching && (
+        <div css={s.spinnerWrapper}>
+          <Spinner size={36} />
+        </div>
+      )}
+      {hasMore && !isFetching && (
         <button css={s.moreButton} onClick={loadMore}>
           더보기
         </button>

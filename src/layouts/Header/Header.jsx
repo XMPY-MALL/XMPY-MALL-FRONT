@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAuthStore } from "../../stores/authStore";
 import * as s from "./styles";
 import { AiOutlineShopping, AiOutlineUser } from "react-icons/ai";
-import { useCategories } from "../../constants/useCategories";
+import { useCategories } from "../../hooks/useCategories";
 import { STATIC_MENU_ITEMS } from "../../constants/menu";
 import CategoryDropdown from "./components/CategoryDropDown/CategoryDropDown";
 

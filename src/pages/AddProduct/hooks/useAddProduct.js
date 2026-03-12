@@ -1,9 +1,11 @@
 import { useForm } from "../../../hooks/useForm";
-import { useCategories } from "../../../constants/useCategories";
+import { useCategories } from "../../../hooks/useCategories";
 import { useProductImages } from "./useProductImage";
 import { useUploadImages } from "./useUploadImages";
-import { createProduct } from "../../../apis/endpoints/product";
 import { useState } from "react";
+import { useMutation } from "@tanstack/react-query";
+import { addProductAPI } from "../../../apis/endpoints/product";
+import { toast } from "react-toastify";
 
 export const useAddProduct = () => {
   const categories = useCategories();
@@ -54,7 +56,16 @@ export const useAddProduct = () => {
       prev.map((s, i) => (i === index ? { ...s, [field]: value } : s)),
     );
 
-  // 제출
+  const { mutate: addProduct, isPending } = useMutation({
+    mutationFn: addProductAPI,
+    onSuccess: () => {
+      toast.success("상품 등록 완료");
+    },
+    onError: () => {
+      toast.error("상품 등록 실패");
+    },
+  });
+
   const handleSubmit = async (detailContent) => {
     const imageUrls = await uploadImages(images);
     const dto = {
@@ -65,8 +76,7 @@ export const useAddProduct = () => {
       stocks,
       detailContent,
     };
-    await createProduct(dto);
-    alert("상품이 등록되었습니다.");
+    addProduct(dto);
   };
 
   return {
@@ -90,6 +100,7 @@ export const useAddProduct = () => {
     removeStock,
     updateStock,
     // 제출
+    isPending,
     handleSubmit,
   };
 };
