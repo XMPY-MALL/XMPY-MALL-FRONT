@@ -10,10 +10,12 @@ import * as s from "./styles";
 
 export default function ProductDetailPage() {
   const { productId } = useParams();
-  const { best, imgUrls, price, productDetailContent, productName } =
-    useProduct(productId);
+  const { data: product, isLoading } = useProduct(productId);
+
   const [activeTab, setActiveTab] = useState("detail");
 
+  if (isLoading) return <div>로딩 중...</div>;
+  const { best, imgUrls, price, productDetailContent, productName } = product;
   return (
     <div css={s.container}>
       <div css={s.topSection}>
