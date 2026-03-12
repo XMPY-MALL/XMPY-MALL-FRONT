@@ -34,6 +34,21 @@ export const topBarLink = css`
   }
 `;
 
+export const topBarButton = css`
+  font-size: 14px;
+  font-weight: 700;
+  color: ${XMPY_COLORS.GRAY_BROWN};
+  text-decoration: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+
+  &:hover {
+    color: ${XMPY_COLORS.BLACK};
+  }
+`;
+
 /* ── 2줄: 메인바 ── */
 export const mainBar = css`
   width: 100%;

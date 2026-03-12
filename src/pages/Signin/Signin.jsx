@@ -55,7 +55,7 @@ export default function Signin() {
             <label>이메일</label>
             <input
               type="text"
-              value={formVal.username}
+              value={formVal.email}
               name="email"
               onChange={handleChange}
               placeholder="이메일을 입력하세요"

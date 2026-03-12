@@ -52,38 +52,20 @@ export const categoryTabStyle = (isActive) => css`
   min-width: 56px;
   height: 30px;
   padding: 0 14px;
-  border: 1px solid
-    ${isActive ? XMPY_COLORS.GRAY_BROWN : XMPY_COLORS.LIGHT_BEIGE};
+  border: 1px solid ${isActive ? XMPY_COLORS.GRAY_BROWN : XMPY_COLORS.LIGHT_BEIGE};
   background-color: ${isActive ? XMPY_COLORS.GRAY_BROWN : XMPY_COLORS.WHITE};
   color: ${isActive ? XMPY_COLORS.WHITE : XMPY_COLORS.GRAY_BROWN};
   font-size: 13px;
   cursor: pointer;
-
-  &:hover {
-    border-color: ${XMPY_COLORS.GRAY_BROWN};
-  }
 `;
 
 export const productListStyle = css`
   max-height: 640px;
   overflow-y: auto;
-  padding-right: 6px;
+  padding-right: 8px;
   display: flex;
   flex-direction: column;
   gap: 12px;
-
-  &::-webkit-scrollbar {
-    width: 6px;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background-color: #d9d3cb;
-    border-radius: 999px;
-  }
-
-  &::-webkit-scrollbar-track {
-    background-color: transparent;
-  }
 `;
 
 export const productCardStyle = (isSelected) => css`
@@ -92,15 +74,10 @@ export const productCardStyle = (isSelected) => css`
   align-items: center;
   gap: 16px;
   padding: 14px;
-  border: 1px solid
-    ${isSelected ? XMPY_COLORS.GRAY_BROWN : XMPY_COLORS.LIGHT_BEIGE};
+  border: 1px solid ${isSelected ? XMPY_COLORS.GRAY_BROWN : XMPY_COLORS.LIGHT_BEIGE};
   background-color: ${XMPY_COLORS.WHITE};
   cursor: pointer;
   text-align: left;
-
-  &:hover {
-    border-color: ${XMPY_COLORS.GRAY_BROWN};
-  }
 `;
 
 export const productThumbStyle = css`
@@ -164,11 +141,6 @@ export const addOptionButtonStyle = css`
   gap: 8px;
   font-size: 15px;
   cursor: pointer;
-
-  &:hover {
-    border-color: ${XMPY_COLORS.GRAY_BROWN};
-    color: ${XMPY_COLORS.BLACK};
-  }
 `;
 
 export const productHeaderStyle = css`
@@ -225,13 +197,12 @@ export const tableWrapperStyle = css`
 
 export const tableHeaderStyle = css`
   display: grid;
-  grid-template-columns: 1.1fr 1fr 1fr 1fr 170px;
+  grid-template-columns: 1.2fr 1fr 1fr 1fr 160px;
   gap: 12px;
   padding: 14px 0;
   border-bottom: 1px solid ${XMPY_COLORS.LIGHT_BEIGE};
   font-size: 15px;
   color: ${XMPY_COLORS.GRAY_BROWN};
-  align-items: center;
 `;
 
 export const tableBodyStyle = css`
@@ -241,7 +212,7 @@ export const tableBodyStyle = css`
 
 export const tableRowStyle = css`
   display: grid;
-  grid-template-columns: 1.1fr 1fr 1fr 1fr 170px;
+  grid-template-columns: 1.2fr 1fr 1fr 1fr 160px;
   gap: 12px;
   align-items: center;
   min-height: 58px;
@@ -262,30 +233,23 @@ export const statusTextStyle = (isSoldOut) => css`
 export const actionButtonsStyle = css`
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
   justify-content: flex-start;
 `;
 
 export const lineButtonStyle = css`
-  min-width: 36px;
-  height: 26px;
-  padding: 0 8px;
+  min-width: 54px;
+  height: 32px;
   border: 1px solid ${XMPY_COLORS.LIGHT_BEIGE};
   background-color: ${XMPY_COLORS.WHITE};
   color: ${XMPY_COLORS.GRAY_BROWN};
-  font-size: 12px;
+  font-size: 14px;
   cursor: pointer;
-  border-radius: 4px;
-
-  &:hover {
-    border-color: ${XMPY_COLORS.GRAY_BROWN};
-    color: ${XMPY_COLORS.BLACK};
-  }
 `;
 
 export const iconDeleteButtonStyle = css`
-  width: 28px;
-  height: 28px;
+  width: 32px;
+  height: 32px;
   border: 1px solid ${XMPY_COLORS.LIGHT_BEIGE};
   background-color: ${XMPY_COLORS.WHITE};
   color: ${XMPY_COLORS.GRAY_BROWN};
@@ -293,30 +257,18 @@ export const iconDeleteButtonStyle = css`
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  font-size: 14px;
-  border-radius: 4px;
-
-  &:hover {
-    border-color: ${XMPY_COLORS.GRAY_BROWN};
-    color: ${XMPY_COLORS.BLACK};
-  }
+  font-size: 16px;
 `;
 
 export const editInputStyle = css`
-  width: 60px;
-  height: 32px;
-  padding: 0 8px;
+  width: 100%;
+  height: 36px;
+  padding: 0 10px;
   border: 1px solid ${XMPY_COLORS.LIGHT_BEIGE};
   background-color: ${XMPY_COLORS.WHITE};
   font-size: 14px;
   color: ${XMPY_COLORS.BLACK};
   outline: none;
-  text-align: center;
-  border-radius: 4px;
-
-  &:focus {
-    border-color: ${XMPY_COLORS.GRAY_BROWN};
-  }
 `;
 
 export const editSelectStyle = css`
@@ -328,11 +280,6 @@ export const editSelectStyle = css`
   font-size: 14px;
   color: ${XMPY_COLORS.BLACK};
   outline: none;
-  border-radius: 4px;
-
-  &:focus {
-    border-color: ${XMPY_COLORS.GRAY_BROWN};
-  }
 `;
 
 export const emptyBoxStyle = css`
