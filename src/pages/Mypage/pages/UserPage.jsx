@@ -1,11 +1,11 @@
 import { useState } from "react";
 import styles from "./UserPage.module.css";
-import OrderList from "./UserPageTabs/OrderList";
-import ReviewWrite from "./UserPageTabs/ReviewWrite";
+import OrderList from "./UserPageTabs/OrderInfo/OrderList";
+import ReviewWrite from "./UserPageTabs/ReviewWrite/ReviewWrite";
 import UserInfo from "./UserPageTabs/UserInfo/UserInfo";
 
 const UserPage = () => {
-  const [activeTab, setActiveTab] = useState("개인 정보 수정");
+  const [activeTab, setActiveTab] = useState("개인정보수정");
 
   return (
     <div className={styles.container}>
@@ -27,7 +27,7 @@ const UserPage = () => {
                     activeTab === "주문내역" 조건이
                     true면 "styles.active"를 추가하고,
                     false면 "빈문자열"을 추가한다
-                */}
+        */}
         <span
           className={`${styles.tabItem} ${activeTab === "리뷰작성" ? styles.active : ""}`}
           onClick={() => setActiveTab("리뷰작성")}
