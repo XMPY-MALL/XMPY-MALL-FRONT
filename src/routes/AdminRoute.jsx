@@ -1,5 +1,5 @@
 import { jwtDecode } from "jwt-decode";
-import { NavLink } from "react-router-dom";
+import { NavLink, Outlet } from "react-router-dom";
 
 export default function AdminRoute() {
   const accessToken = localStorage.getItem("accessToken");
@@ -11,4 +11,6 @@ export default function AdminRoute() {
   }
 
   return <Outlet />;
+
+
 }
