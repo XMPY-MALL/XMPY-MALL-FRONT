@@ -1,16 +1,53 @@
-export const useProduct = (id) => {
-  return {
-    productName: "오버사이즈 코튼 셔츠",
-    description:
-      "편안한 착용감의 루즈핏 코튼 셔츠. 데일리룩부터 캐주얼 코디까지 다양하게 활용 가능합니다.",
+import { useQuery } from "@tanstack/react-query";
+import { fetchProductDetail } from "../../../apis/endpoints/product";
+
+const fallbackData = {
+  1: {
+    productName: "루즈핏 셔츠",
+    price: 109000,
     best: true,
-    imgUrls: [
-      "https://lookple.com/web/product/extra/big/202409/f8a728d98e87ff129eac92a244ee0b3c.png",
-      "https://lookple.com/web/product/extra/big/202409/753cda836d7a089cd651b6358f0ba23c.png",
-    ],
-    price: 49000,
-    quickRundown: "100% 코튼 | 오버사이즈 핏 | 남녀공용 | 머신워셔블",
-    productDetailContent:
-      '<p>오버사이즈 코튼 셔츠를 소개합니다.</p><p>부드러운 면 100% 소재로 사계절 편안하게 착용 가능한 데일리 셔츠입니다.</p><img src="https://lookple.com/web/product/extra/big/202409/f8a728d98e87ff129eac92a244ee0b3c.png" /><p>넉넉한 오버사이즈 핏으로 누구나 편안하게 입을 수 있으며, 단독 착용 및 레이어드 코디 모두 잘 어울립니다.</p><p>소재: 면 100% / 사이즈: S, M, L, XL / 색상: 화이트, 베이지, 블랙</p><img src="https://lookple.com/web/product/extra/big/202409/753cda836d7a089cd651b6358f0ba23c.png" /><p>찬물 세탁 권장, 뒤집어서 세탁 시 형태 유지에 도움이 됩니다.</p>',
+    imgUrls: ["https://lookple.com/web/product/big/202009/5f202219f7841f66aee55f6d4af304cf.webp"],
+    description: "남친룩, 데이트룩으로 알맞는 기본 셔츠아이템",
+    quickRundown: "면 혼방 | 루즈핏 | 간절기 추천 | 봄 추천",
+    productDetailContent: "<p>남친룩, 데이트룩으로 알맞는 기본 셔츠아이템!</p><p>간절기, 봄 시즌에 알맞는 셔츠입니다.</p>",
+  },
+  2: {
+    productName: "와이드슬랙스",
+    price: 44900,
+    best: true,
+    imgUrls: ["https://cafe24img.poxo.com/hanggi4043/web/product/big/202602/e720adcff4e351bee25519e87de1f7d1.jpg"],
+    description: "트랜디한 실루엣으로 맞게 떨어지는 기본아이템",
+    quickRundown: "고급원단 | 와이드핏 | 세탁 후 변형 없음 | 사계절",
+    productDetailContent: "<p>트랜디한 실루엣으로 맞게 떨어지는 기본아이템!</p><p>고급원단을 사용하여 세탁시에도 줄어들거나 헤지지 않습니다.</p>",
+  },
+  3: {
+    productName: "레더자켓",
+    price: 35900,
+    best: true,
+    imgUrls: ["https://cafe24img.poxo.com/hanggi4043/web/product/big/202603/3f965b4ccdac8c118412f3b1f5ec094b.webp"],
+    description: "요즘 트랜드에 알맞는 레더자켓",
+    quickRundown: "고급가죽 | 구겨짐 없음 | 물빠짐 없음 | 가을 겨울 추천",
+    productDetailContent: "<p>요즘 트랜드에 알맞는 자켓!</p><p>고급가죽을 사용하여 구겨짐이나 물빠짐이 없습니다.</p>",
+  },
+};
+
+export const useProduct = (id) => {
+  const { data } = useQuery({
+    queryKey: ["product", id],
+    queryFn: () => fetchProductDetail(id),
+    enabled: !!id,
+    retry: false,
+  });
+
+  const fallback = fallbackData[id] ?? {};
+
+  return {
+    productName: data?.productName || fallback.productName || "",
+    description: data?.description || fallback.description || "",
+    best: data?.best ?? fallback.best ?? false,
+    imgUrls: (data?.imgUrls?.length ? data.imgUrls : fallback.imgUrls) ?? [],
+    price: data?.price || fallback.price || 0,
+    quickRundown: data?.quickRundown || fallback.quickRundown || "",
+    productDetailContent: data?.productDetailContent || fallback.productDetailContent || "",
   };
 };

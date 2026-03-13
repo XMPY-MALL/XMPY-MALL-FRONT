@@ -30,6 +30,13 @@ export const cardImage = css`
   width: 100%;
   aspect-ratio: 1 / 1;
   background-color: ${XMPY_COLORS.LIGHT_BEIGE};
+  overflow: hidden;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 `;
 
 export const cardTitle = css`
