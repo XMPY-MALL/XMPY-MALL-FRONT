@@ -79,3 +79,9 @@ export const moreButton = css`
     background: ${XMPY_COLORS.LIGHT_BEIGE};
   }
 `;
+
+export const spinnerWrapper = css`
+  display: flex;
+  justify-content: center;
+  padding: 20px 0;
+`;

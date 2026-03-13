@@ -17,3 +17,11 @@ export const getMyReviewsAPI = async () => {
   const res = await instance.get("/api/reviews/me");
   return res.data;
 };
+
+// 4. 하나의 상품에 대한 리뷰목
+export const getReviewsAPI = async (productId, offset, limit) => {
+  const { data } = await instance.get("/reviews", {
+    params: { productId, offset, limit },
+  });
+  return data;
+};

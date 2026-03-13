@@ -1,4 +1,3 @@
-
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 
@@ -10,7 +9,7 @@ export const container = css`
   justify-content: center;
   padding-top: 10px;
   padding-bottom: 70px;
-  background-color: #F8F6F1;
+  background-color: #f8f6f1;
 `;
 
 export const signinBox = css`
@@ -22,12 +21,10 @@ export const signinBox = css`
   justify-content: center;
 `;
 
-
-
 export const title = css`
   text-align: center;
   margin-bottom: 8px;
-  color: #1A1A1A;
+  color: #1a1a1a;
   font-size: 20px;
   font-weight: 450;
   cursor: default;
@@ -49,19 +46,19 @@ export const inputBox = css`
   & > label {
     font-size: 14px;
     font-weight: 500;
-    color: #1A1A1A;
+    color: #1a1a1a;
   }
 
   & > input {
     padding: 12px 16px;
     font-size: 14px;
-    border: 1px solid #E8E2D9;
+    border: 1px solid #e8e2d9;
     border-radius: 4px;
     background-color: #fff;
 
     &:focus {
       outline: none;
-      border-color: #C4A882;
+      border-color: #c4a882;
     }
 
     &::placeholder {
@@ -74,7 +71,7 @@ export const btn = css`
   padding: 8px;
   font-size: 15px;
   font-weight: 500;
-  background-color: #6B6560;
+  background-color: #6b6560;
   border: none;
   color: white;
   cursor: pointer;
@@ -84,11 +81,11 @@ export const btn = css`
   width: 100%;
 
   &:hover {
-    background-color: #1A1A1A;
+    background-color: #1a1a1a;
   }
 
   &:disabled {
-    background-color: #E8E2D9;
+    background-color: #e8e2d9;
     cursor: not-allowed;
   }
 `;
@@ -101,7 +98,7 @@ export const signupTextBox = css`
 `;
 
 export const signupText = css`
-  color: #1A1A1A;
+  color: #1a1a1a;
   font-size: 14px;
   cursor: default;
 `;
@@ -109,5 +106,5 @@ export const signupText = css`
 export const signupLink = css`
   text-decoration: none;
   font-size: 14px;
-  color: #C4A882;
+  color: #c4a882;
 `;

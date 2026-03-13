@@ -80,9 +80,16 @@ export default function Signin() {
 
           {/* 이거 추가 */}
           {errorMessage && (
-              <p style={{ color: 'red', fontSize: '13px', textAlign: 'center', marginTop: '-10px' }}>
-                  {errorMessage}
-              </p>
+            <p
+              style={{
+                color: "red",
+                fontSize: "13px",
+                textAlign: "center",
+                marginTop: "-10px",
+              }}
+            >
+              {errorMessage}
+            </p>
           )}
         </div>
       </div>

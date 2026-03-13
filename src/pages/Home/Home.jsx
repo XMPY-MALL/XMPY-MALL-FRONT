@@ -4,41 +4,49 @@ import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import { useNavigate } from "react-router-dom";
 import * as s from "./styles";
-
-const BEST_ITEMS = [
-  { id: 1, title: "Best 상의", image: null },
-  { id: 2, title: "Best 하의", image: null },
-  { id: 3, title: "Best 아우터", image: null },
-  { id: 4, title: "Best 신발", image: null },
-];
+import { useHomeCard } from "./useHome";
 
 export default function Home() {
+  const { data: categories = [], isLoading, isError } = useHomeCard();
+  const navigate = useNavigate();
+
+  const categoryList = Array.isArray(categories) ? categories : categories ? [categories] : [];
+  const bestItems = categoryList.flatMap((cat) => cat.products ?? []);
+
   return (
     <div css={s.container}>
       <h2 css={s.sectionTitle}>Best</h2>
 
       <div css={s.swiperWrapper}>
-        <Swiper
-          modules={[Navigation, Pagination, Autoplay]}
-          spaceBetween={20}
-          slidesPerView={3}
-          navigation
-          pagination={{ clickable: true }}
-          autoplay={{ delay: 3000, disableOnInteraction: false }}
-          css={s.swiper}
-        >
-        {BEST_ITEMS.map((item) => (
-            <SwiperSlide key={item.id}>
-              <div css={s.card}>
-                <div css={s.cardImage}>
-                  {/* 이미지 들어올 자리!! 여기에 useQuery로 Best아이템들 잡아와서 넣으십시오 */}
+        {isLoading && <p>로딩 중...</p>}
+        {isError && <p>데이터를 불러오지 못했습니다.</p>}
+        {!isLoading && !isError && bestItems.length === 0 && (
+          <p>등록된 베스트 상품이 없습니다.</p>
+        )}
+        {!isLoading && !isError && bestItems.length > 0 && (
+          <Swiper
+            modules={[Navigation, Pagination, Autoplay]}
+            spaceBetween={20}
+            slidesPerView={3}
+            navigation
+            pagination={{ clickable: true }}
+            autoplay={{ delay: 3000, disableOnInteraction: false }}
+            css={s.swiper}
+          >
+            {bestItems.map((item) => (
+              <SwiperSlide key={item.productId} onClick={() => navigate(`/product/${item.productId}`)}>
+                <div css={s.card}>
+                  <div css={s.cardImage}>
+                    {item.thumbnailUrl && <img src={item.thumbnailUrl} alt={item.productName} />}
+                  </div>
+                  <p css={s.cardTitle}>{item.productName}</p>
                 </div>
-                <p css={s.cardTitle}> {item.title} </p>
-              </div>
-            </SwiperSlide>
-          ))}
-        </Swiper>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        )}
       </div>
     </div>
   );
