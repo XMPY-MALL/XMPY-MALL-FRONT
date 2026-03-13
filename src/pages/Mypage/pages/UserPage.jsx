@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styles from "./UserPage.module.css";
-import OrderList from "./UserPageTabs/OrderList/OrderList";
-import ReviewWrite from "./UserPageTabs/ReviewWrite";
+import OrderList from "./UserPageTabs/OrderInfo/OrderList";
+import ReviewWrite from "./UserPageTabs/ReviewWrite/ReviewWrite;
 import UserInfo from "./UserPageTabs/UserInfo/UserInfo";
 
 const tabMenu = {
@@ -33,7 +33,7 @@ const UserPage = () => {
                     activeTab === "주문내역" 조건이
                     true면 "styles.active"를 추가하고,
                     false면 "빈문자열"을 추가한다
-                */}
+        */}
         <span
           className={`${styles.tabItem} ${activeTab === tabMenu[1] ? styles.active : ""}`}
           onClick={() => setActiveTab(tabMenu[1])}
