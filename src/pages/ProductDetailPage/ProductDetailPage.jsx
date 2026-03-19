@@ -9,44 +9,48 @@ import { useState } from "react";
 import * as s from "./styles";
 
 export default function ProductDetailPage() {
-  const { productId } = useParams();
-  const { best, imgUrls, price, productDetailContent, productName } =
-    useProduct(productId);
-  const [activeTab, setActiveTab] = useState("detail");
+    const { productId } = useParams();
+    const { data, isLoading, isError } = useProduct(productId);
+    const [activeTab, setActiveTab] = useState("detail");
 
-  return (
-    <div css={s.container}>
-      <div css={s.topSection}>
-        <Thumbnail imgUrls={imgUrls} />
-        <Order
-          productName={productName}
-          price={price}
-          id={productId}
-          best={best}
-          imgUrls={imgUrls}
-        />
-      </div>
-      <div css={s.tabBar}>
-        <button
-          css={s.tabButton(activeTab === "detail")}
-          onClick={() => setActiveTab("detail")}
-          aria-selected={activeTab === "detail"}
-        >
-          상세정보
-        </button>
-        <button
-          css={s.tabButton(activeTab === "reviews")}
-          onClick={() => setActiveTab("reviews")}
-          aria-selected={activeTab === "reviews"}
-        >
-          상품 후기
-        </button>
-      </div>
-      {activeTab === "detail" ? (
-        <ProductDetail productDetailContent={productDetailContent} />
-      ) : (
-        <Reviews id={productId} />
-      )}
-    </div>
-  );
+    if (isLoading) return <div>로딩 중...</div>;
+    if (isError || !data) return <div>상품 정보를 불러올 수 없습니다.</div>;
+
+    const { best, imgUrls, price, productDetailContent, productName } = data;
+
+    return (
+        <div css={s.container}>
+            <div css={s.topSection}>
+                <Thumbnail imgUrls={imgUrls} />
+                <Order
+                    productName={productName}
+                    price={price}
+                    id={productId}
+                    best={best}
+                    imgUrls={imgUrls}
+                />
+            </div>
+            <div css={s.tabBar}>
+                <button
+                    css={s.tabButton(activeTab === "detail")}
+                    onClick={() => setActiveTab("detail")}
+                    aria-selected={activeTab === "detail"}
+                >
+                    상세정보
+                </button>
+                <button
+                    css={s.tabButton(activeTab === "reviews")}
+                    onClick={() => setActiveTab("reviews")}
+                    aria-selected={activeTab === "reviews"}
+                >
+                    상품 후기
+                </button>
+            </div>
+            {activeTab === "detail" ? (
+                <ProductDetail productDetailContent={productDetailContent} />
+            ) : (
+                <Reviews id={productId} />
+            )}
+        </div>
+    );
 }
